@@ -71,4 +71,12 @@ public class ProductCategory {
     public void setCategory_name(String category_name) {
         this.category_name = category_name;
     }
+
+    public List<Promotion> getPromotions() {
+        return promotions;
+    }
+
+    public void setPromotions(List<Promotion> promotions) {
+        this.promotions = promotions;
+    }
 }

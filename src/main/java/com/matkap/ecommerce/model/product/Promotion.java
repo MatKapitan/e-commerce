@@ -2,6 +2,7 @@ package com.matkap.ecommerce.model.product;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
@@ -23,6 +24,7 @@ public class Promotion {
     @JsonFormat(pattern="yyyy-MM-dd")
     private Timestamp end_date;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "promotion_category",
             joinColumns = @JoinColumn(name = "promotion_id", referencedColumnName = "id"),

@@ -70,10 +70,9 @@ public class ProductItemServiceImpl implements ProductItemService {
 
     @Override
     @Transactional
-    public ProductItemResponseDto deleteProductItem(Long productItemId) {
+    public void deleteProductItem(Long productItemId) {
         ProductItem productItem = getProductItem(productItemId);
         productItemRepository.delete(productItem);
-        return Mapper.productItemToProductItemResponseDto(productItem);
     }
 
     @Override

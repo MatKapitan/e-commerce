@@ -12,7 +12,7 @@ public interface SiteUserService {
     public List<SiteUser> getSiteUsers();
     public SiteUser getSiteUserById(Long siteUserId);
     public SiteUser getSiteUser(Long siteUserId);
-    public SiteUser deleteSiteUser(Long siteUserId);
+    public void deleteSiteUser(Long siteUserId);
     public SiteUser editSiteUser(Long siteUserId, SiteUserRequestDto siteUserRequestDto);
 
 }

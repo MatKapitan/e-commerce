@@ -76,10 +76,9 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Address deleteAddress(Long addressId) {
+    public void deleteAddress(Long addressId) {
         Address address = getAddress(addressId);
         addressRepository.delete(address);
-        return address;
     }
 
     @Override

@@ -39,10 +39,9 @@ public class SiteUserController {
     }
 
     @DeleteMapping("/delete/{id}")
-
-    public ResponseEntity<SiteUser> deleteSiteUser(@PathVariable Long id){
-        SiteUser siteUser = siteUserService.deleteSiteUser(id);
-        return new ResponseEntity<>(siteUser, HttpStatus.OK);
+    public ResponseEntity<Void> deleteSiteUser(@PathVariable Long id){
+        siteUserService.deleteSiteUser(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/edit/{id}")

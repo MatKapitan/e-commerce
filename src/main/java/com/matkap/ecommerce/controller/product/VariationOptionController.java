@@ -39,8 +39,8 @@ private final VariationOptionService variationOptionService;
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<VariationOptionResponseDto> deleteVariationOption(@PathVariable Long id){
-        VariationOptionResponseDto variationOptionResponseDto = variationOptionService.deleteVariationOption(id);
-        return new ResponseEntity<>(variationOptionResponseDto, HttpStatus.OK);
+        variationOptionService.deleteVariationOption(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/edit/{id}")

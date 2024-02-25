@@ -53,10 +53,9 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     }
 
     @Override
-    public ProductCategoryResponseDto deleteProductCategory(Long productCategoryId) {
+    public void deleteProductCategory(Long productCategoryId) {
         ProductCategory productCategory = getProductCategory(productCategoryId);
         productCategoryRepository.delete(productCategory);
-        return Mapper.productCategoryToProductCategoryResponseDto(productCategory);
     }
 
     @Override

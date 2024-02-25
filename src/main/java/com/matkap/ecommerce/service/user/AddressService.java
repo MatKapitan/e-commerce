@@ -16,7 +16,7 @@ public interface AddressService {
     public Address getAddressById(Long addressId);
     public Address getAddress(Long addressId);
     public Country getCountry(Long countryId);
-    public Address deleteAddress(Long addressId);
+    public void deleteAddress(Long addressId);
     public Address editAddress(Long addressId, AddressRequestDto addressRequestDto);
 
 }

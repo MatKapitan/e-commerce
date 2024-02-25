@@ -56,10 +56,9 @@ public class VariationServiceImpl implements VariationService {
     }
 
     @Override
-    public VariationResponseDto deleteVariation(Long validationId) {
+    public void deleteVariation(Long validationId) {
         Variation variation = getVariation(validationId);
         variationRepository.delete(variation);
-        return Mapper.variationToVariationResponseDto(variation);
     }
 
     @Override

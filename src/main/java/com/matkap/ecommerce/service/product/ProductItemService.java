@@ -12,7 +12,7 @@ public interface ProductItemService {
     public List<ProductItemResponseDto> getProductItems();
     public ProductItemResponseDto getProductItemById(Long productItemId);
     public ProductItem getProductItem(Long productItemId);
-    public ProductItemResponseDto deleteProductItem(Long productItemId);
+    public void deleteProductItem(Long productItemId);
     public ProductItemResponseDto editProductItem(Long productItemId, ProductItemRequestDto productItemRequestDto);
 
     public ProductItemResponseDto addVariationOptionToProductItem(Long product_item_id ,Long variation_option_id);

@@ -47,10 +47,9 @@ public class SiteUserServiceImpl implements SiteUserService {
     }
 
     @Override
-    public SiteUser deleteSiteUser(Long siteUserId) {
+    public void deleteSiteUser(Long siteUserId) {
         SiteUser siteUser = getSiteUser(siteUserId);
         siteUserRepository.delete(siteUser);
-        return siteUser;
     }
 
     @Override

@@ -59,10 +59,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponseDto deleteProduct(Long productId) {
+    public void deleteProduct(Long productId) {
         Product product = getProduct(productId);
         productRepository.delete(product);
-        return Mapper.productToProductResponseDto(product);
     }
     @Transactional
     @Override

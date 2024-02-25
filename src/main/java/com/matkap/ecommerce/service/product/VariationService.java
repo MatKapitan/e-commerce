@@ -14,6 +14,6 @@ public interface VariationService {
     public List<VariationResponseDto> getVariations();
     public VariationResponseDto getVariationById(Long validationId);
     public Variation getVariation(Long validationId);
-    public VariationResponseDto deleteVariation(Long validationId);
+    public void deleteVariation(Long validationId);
     public VariationResponseDto editVariation(Long validationId, VariationRequestDto variationRequestDto);
 }

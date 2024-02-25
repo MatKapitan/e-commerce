@@ -13,6 +13,6 @@ public interface ProductCategoryService {
     public List<ProductCategoryResponseDto> getProductCategories();
     public ProductCategoryResponseDto getProductCategoryById(Long productCategoryId);
     public ProductCategory getProductCategory(Long productCategoryId);
-    public ProductCategoryResponseDto deleteProductCategory(Long productCategoryId);
+    public void deleteProductCategory(Long productCategoryId);
     public ProductCategoryResponseDto editProductCategory(Long productCategoryId, ProductCategoryRequestDto productCategoryRequestDto);
 }

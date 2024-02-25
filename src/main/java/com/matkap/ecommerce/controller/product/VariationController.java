@@ -40,9 +40,9 @@ public class VariationController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<VariationResponseDto> deleteVariation(@PathVariable Long id){
-        VariationResponseDto variationResponseDto = variationService.deleteVariation(id);
-        return new ResponseEntity<>(variationResponseDto, HttpStatus.OK);
+    public ResponseEntity<Void> deleteVariation(@PathVariable Long id){
+        variationService.deleteVariation(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/edit/{id}")

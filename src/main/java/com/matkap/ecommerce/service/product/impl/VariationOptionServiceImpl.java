@@ -58,10 +58,9 @@ private final VariationService variationService;
     }
 
     @Override
-    public VariationOptionResponseDto deleteVariationOption(Long validationOptionId) {
+    public void deleteVariationOption(Long validationOptionId) {
         VariationOption variationOption = getVariationOption(validationOptionId);
         variationOptionRepository.delete(variationOption);
-        return Mapper.variationOptionToVariationOptionResponseDto(variationOption);
     }
 
     @Override

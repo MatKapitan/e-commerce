@@ -39,9 +39,9 @@ public class ProductCategoryController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<ProductCategoryResponseDto> deleteProductCategory(@PathVariable Long id){
-        ProductCategoryResponseDto productCategoryResponseDto = productCategoryService.deleteProductCategory(id);
-        return new ResponseEntity<>(productCategoryResponseDto, HttpStatus.OK);
+    public ResponseEntity<Void> deleteProductCategory(@PathVariable Long id){
+        productCategoryService.deleteProductCategory(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/edit/{id}")

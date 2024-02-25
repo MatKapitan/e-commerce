@@ -13,7 +13,7 @@ public interface ProductService {
     public List<ProductResponseDto> getProducts();
     public ProductResponseDto getProductById(Long productId);
     public Product getProduct(Long productId);
-    public ProductResponseDto deleteProduct(Long productId);
+    public void deleteProduct(Long productId);
     public ProductResponseDto editProduct(Long productId, ProductRequestDto productRequestDto);
 
 

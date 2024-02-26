@@ -1,5 +1,7 @@
 package com.matkap.ecommerce.model.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.matkap.ecommerce.model.shopingCard.ShoppingCard;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -32,6 +34,9 @@ public class ProductItem {
                     inverseJoinColumns = @JoinColumn(name = "variation_option_id"))
     private List<VariationOption> variationOptions = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "productItem")
+    private List<ShoppingCard> shoppingCards;
 
     public ProductItem() {
     }

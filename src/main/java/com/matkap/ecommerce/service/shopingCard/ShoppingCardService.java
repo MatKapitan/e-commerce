@@ -10,6 +10,7 @@ public interface ShoppingCardService {
 
     public ShoppingCard createShoppingCard(ShoppingCardRequestDto shoppingCardItemRequestDto);
     public List<ShoppingCard> getShoppingCards();
+    public List<ShoppingCard> getShoppingCardsBySiteUser(Long siteUserId);
     public ShoppingCard getShoppingCardById(Long shoppingCardId);
     public ShoppingCard getShoppingCard(Long shoppingCardId);
     public void deleteShoppingCard(Long shoppingCardId);

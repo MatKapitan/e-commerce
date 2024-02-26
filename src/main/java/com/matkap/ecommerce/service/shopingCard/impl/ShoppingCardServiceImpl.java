@@ -44,6 +44,12 @@ public class ShoppingCardServiceImpl implements ShoppingCardService {
     }
 
     @Override
+    public List<ShoppingCard> getShoppingCardsBySiteUser(Long siteUserId) {
+        SiteUser siteUser = siteUserService.getSiteUser(siteUserId);
+        return shoppingCardRepository.findBySiteUser(siteUser);
+    }
+
+    @Override
     public ShoppingCard getShoppingCardById(Long shoppingCardId) {
         return getShoppingCard(shoppingCardId);
     }

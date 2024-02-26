@@ -6,10 +6,13 @@ import com.matkap.ecommerce.exception.EntityNotFoundException;
 import com.matkap.ecommerce.model.order.OrderLine;
 import com.matkap.ecommerce.model.order.ShopOrder;
 import com.matkap.ecommerce.model.product.ProductItem;
+import com.matkap.ecommerce.model.shopingCard.ShoppingCard;
 import com.matkap.ecommerce.repository.order.OrderLineRepository;
 import com.matkap.ecommerce.service.order.OrderLineService;
 import com.matkap.ecommerce.service.order.ShopOrderService;
 import com.matkap.ecommerce.service.product.ProductItemService;
+import com.matkap.ecommerce.service.shopingCard.ShoppingCardService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,25 +25,30 @@ public class OrderLineServiceImpl implements OrderLineService {
     private final ProductItemService productItemService;
 
     private final ShopOrderService shopOrderService;
+    private final ShoppingCardService shoppingCardService;
 
-    public OrderLineServiceImpl(OrderLineRepository orderLineRepository, ProductItemService productItemService, ShopOrderService shopOrderService) {
+    public OrderLineServiceImpl(OrderLineRepository orderLineRepository, ProductItemService productItemService, ShopOrderService shopOrderService, ShoppingCardService shoppingCardService) {
         this.orderLineRepository = orderLineRepository;
         this.productItemService = productItemService;
         this.shopOrderService = shopOrderService;
+        this.shoppingCardService = shoppingCardService;
     }
 
 
-    @Override
-    public OrderLine createOrderLine(OrderLineRequestDto orderLineRequestDto) {
-        OrderLine orderLine = new OrderLine();
-        ProductItem productItem = productItemService.getProductItem(orderLineRequestDto.getProductItemId());
-        orderLine.setProductItem(productItem);
-        ShopOrder shopOrder = shopOrderService.getShopOrder(orderLineRequestDto.getShopOrderId());
-        orderLine.setShopOrder(shopOrder);
-        orderLine.setQuantity(orderLineRequestDto.getQuantity());
-        orderLine.setPrice(orderLineRequestDto.getPrice());
-        return orderLineRepository.save(orderLine);
+    @Transactional
+    public void shoppingCardToShopOrder(Long siteUserId, Long shopOrderId) {
+        List<ShoppingCard> shoppingCardsBySiteUser = shoppingCardService.getShoppingCardsBySiteUser(siteUserId);
+        for (ShoppingCard shoppingcard : shoppingCardsBySiteUser) {
+            OrderLine orderLine = new OrderLine();
+            orderLine.setShopOrder(shopOrderService.getShopOrder(shopOrderId));
+            orderLine.setProductItem(shoppingcard.getProductItem());
+            orderLine.setQuantity(shoppingcard.getQuantity()); // TODO price calculation
+
+            orderLineRepository.save(orderLine);
+            shoppingCardService.deleteShoppingCard(shoppingcard.getId());
+        }
     }
+
 
     @Override
     public List<OrderLine> getOrderLines() {
@@ -62,17 +70,5 @@ public class OrderLineServiceImpl implements OrderLineService {
     public void deleteOrderLine(Long orderLineId) {
         OrderLine orderLine = getOrderLine(orderLineId);
         orderLineRepository.delete(orderLine);
-    }
-
-    @Override
-    public OrderLine editOrderLine(Long orderLineId, OrderLineRequestDto orderLineRequestDto) {
-        OrderLine orderLine = getOrderLine(orderLineId);
-        ProductItem productItem = productItemService.getProductItem(orderLineRequestDto.getProductItemId());
-        orderLine.setProductItem(productItem);
-        ShopOrder shopOrder = shopOrderService.getShopOrder(orderLineRequestDto.getShopOrderId());
-        orderLine.setShopOrder(shopOrder);
-        orderLine.setQuantity(orderLineRequestDto.getQuantity());
-        orderLine.setPrice(orderLineRequestDto.getPrice());
-        return orderLineRepository.save(orderLine);
     }
 }

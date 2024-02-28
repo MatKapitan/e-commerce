@@ -19,12 +19,12 @@ public class OrderLineController {
         this.orderLineService = orderLineService;
     }
 
-    @PostMapping("/user/{siteUserId}/order/{shopOrderId}")
-    public ResponseEntity<Void> shoppingCardToShopOrder(@PathVariable Long siteUserId,
-                                                        @PathVariable Long shopOrderId){
-        orderLineService.shoppingCardToShopOrder(siteUserId, shopOrderId);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    @PostMapping("/user/{siteUserId}/order/{shopOrderId}")
+//    public ResponseEntity<Void> shoppingCardToShopOrder(@PathVariable Long siteUserId,
+//                                                        @PathVariable Long shopOrderId){
+//        orderLineService.shoppingCardToShopOrder(siteUserId, shopOrderId);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
     @GetMapping("/{orderLineId}")
     public ResponseEntity<OrderLine> getOrderLineByIdd (@PathVariable Long orderLineId){

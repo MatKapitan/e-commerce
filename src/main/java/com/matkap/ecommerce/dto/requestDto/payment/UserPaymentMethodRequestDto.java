@@ -14,7 +14,7 @@ public class UserPaymentMethodRequestDto {
     private String provider;
     private String accountNumber;
     private Timestamp expiryDate;
-    private Boolean defaultPayment;
+    private Boolean defaultPayment; //todo default false- method to set true
 
     public UserPaymentMethodRequestDto() {
     }

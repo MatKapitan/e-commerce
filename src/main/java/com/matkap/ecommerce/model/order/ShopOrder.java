@@ -1,5 +1,6 @@
 package com.matkap.ecommerce.model.order;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.matkap.ecommerce.model.payment.UserPaymentMethod;
 import com.matkap.ecommerce.model.user.Address;
 import com.matkap.ecommerce.model.user.SiteUser;
@@ -33,6 +34,12 @@ public class ShopOrder {
     @ManyToOne
     @JoinColumn(name = "order_status_id")
     private OrderStatus orderStatus;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "shopOrder")
+    private List<OrderLine> orderLines;
+
+
 
     public ShopOrder() {
     }
@@ -99,5 +106,13 @@ public class ShopOrder {
 
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public List<OrderLine> getOrderLines() {
+        return orderLines;
+    }
+
+    public void setOrderLines(List<OrderLine> orderLines) {
+        this.orderLines = orderLines;
     }
 }

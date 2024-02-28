@@ -1,6 +1,7 @@
 package com.matkap.ecommerce.model.payment;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.matkap.ecommerce.model.user.SiteUser;
 import jakarta.persistence.*;
 
@@ -13,11 +14,10 @@ public class UserPaymentMethod {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "site_user_id")
     private SiteUser siteUser;
-
 
     @ManyToOne
     @JoinColumn(name = "payment_type_id")
@@ -26,7 +26,6 @@ public class UserPaymentMethod {
     private String provider;
     private String accountNumber;
     private Timestamp expiryDate;
-
     private Boolean defaultPayment;
 
 

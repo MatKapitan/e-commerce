@@ -1,13 +1,14 @@
 package com.matkap.ecommerce.service.order;
 
-import com.matkap.ecommerce.dto.requestDto.order.OrderLineRequestDto;
 import com.matkap.ecommerce.model.order.OrderLine;
+import com.matkap.ecommerce.model.order.ShopOrder;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface OrderLineService {
 
-    public void shoppingCardToShopOrder(Long siteUserId, Long shopOrderId);
+    public BigDecimal shoppingCardToShopOrder(Long siteUserId, ShopOrder shopOrder);
     public List<OrderLine> getOrderLines();
     public OrderLine getOrderLineById(Long orderLineId);
     public OrderLine getOrderLine(Long orderLineId);

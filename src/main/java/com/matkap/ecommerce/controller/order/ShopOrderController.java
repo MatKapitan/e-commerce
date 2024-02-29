@@ -3,6 +3,7 @@ package com.matkap.ecommerce.controller.order;
 import com.matkap.ecommerce.dto.requestDto.order.ShopOrderRequestDto;
 import com.matkap.ecommerce.model.order.ShopOrder;
 import com.matkap.ecommerce.service.order.ShopOrderService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class ShopOrderController {
     }
 
     @PostMapping
-    public ResponseEntity<ShopOrder> createShopOrder(@RequestBody ShopOrderRequestDto shopOrderRequestDto){
+    public ResponseEntity<ShopOrder> createShopOrder(@Valid @RequestBody ShopOrderRequestDto shopOrderRequestDto){
         ShopOrder shopOrder = shopOrderService.createShopOrder(shopOrderRequestDto);
         return new ResponseEntity<>(shopOrder, HttpStatus.OK);
     }

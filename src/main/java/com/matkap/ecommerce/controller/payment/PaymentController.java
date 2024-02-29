@@ -5,6 +5,7 @@ import com.matkap.ecommerce.dto.requestDto.payment.UserPaymentMethodRequestDto;
 import com.matkap.ecommerce.model.payment.PaymentType;
 import com.matkap.ecommerce.model.payment.UserPaymentMethod;
 import com.matkap.ecommerce.service.payment.UserPaymentMethodService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class PaymentController {
     }
 
     @PostMapping
-    public ResponseEntity<UserPaymentMethod> createUserPaymentMethod(@RequestBody UserPaymentMethodRequestDto userPaymentMethodRequestDto){
+    public ResponseEntity<UserPaymentMethod> createUserPaymentMethod(@Valid @RequestBody UserPaymentMethodRequestDto userPaymentMethodRequestDto){
         UserPaymentMethod userPaymentMethod = userPaymentMethodService.createUserPaymentMethod(userPaymentMethodRequestDto);
         return new ResponseEntity<>(userPaymentMethod, HttpStatus.OK);
     }
@@ -53,7 +54,7 @@ public class PaymentController {
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<UserPaymentMethod> editUserPaymentMethod(@PathVariable Long id,
-                                                                   @RequestBody UserPaymentMethodRequestDto userPaymentMethodRequestDto){
+                                                                   @Valid @RequestBody UserPaymentMethodRequestDto userPaymentMethodRequestDto){
         UserPaymentMethod userPaymentMethod = userPaymentMethodService.editUserPaymentMethod(id, userPaymentMethodRequestDto);
         return new ResponseEntity<>(userPaymentMethod, HttpStatus.OK);
     }

@@ -4,6 +4,7 @@ package com.matkap.ecommerce.controller.user;
 import com.matkap.ecommerce.dto.requestDto.user.SiteUserRequestDto;
 import com.matkap.ecommerce.model.user.SiteUser;
 import com.matkap.ecommerce.service.user.SiteUserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class SiteUserController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<SiteUser> createSiteUser(@RequestBody SiteUserRequestDto siteUserRequestDto){
+    public ResponseEntity<SiteUser> createSiteUser(@Valid @RequestBody SiteUserRequestDto siteUserRequestDto){
         SiteUser siteUser = siteUserService.createSiteUser(siteUserRequestDto);
         return new ResponseEntity<>(siteUser, HttpStatus.OK);
     }
@@ -46,7 +47,7 @@ public class SiteUserController {
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<SiteUser> editSiteUser(@PathVariable Long id,
-                                                 @RequestBody SiteUserRequestDto siteUserRequestDto){
+                                                 @Valid @RequestBody SiteUserRequestDto siteUserRequestDto){
         SiteUser siteUser = siteUserService.editSiteUser(id, siteUserRequestDto);
         return new ResponseEntity<>(siteUser, HttpStatus.OK);
     }

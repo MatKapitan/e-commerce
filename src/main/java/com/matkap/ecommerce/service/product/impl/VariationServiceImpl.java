@@ -30,8 +30,8 @@ public class VariationServiceImpl implements VariationService {
     public VariationResponseDto createVariation(VariationRequestDto variationRequestDto) {
         Variation variation = new Variation();
         variation.setName(variationRequestDto.getName());
-        if (variationRequestDto.getCategory_id() != null){
-            ProductCategory productCategory = productCategoryService.getProductCategory(variationRequestDto.getCategory_id());
+        if (variationRequestDto.getCategoryId() != null){
+            ProductCategory productCategory = productCategoryService.getProductCategory(variationRequestDto.getCategoryId());
             variation.setProductCategory(productCategory);
         }
         variationRepository.save(variation);
@@ -65,8 +65,8 @@ public class VariationServiceImpl implements VariationService {
     public VariationResponseDto editVariation(Long validationId, VariationRequestDto variationRequestDto) {
         Variation variationToEdit = getVariation(validationId);
         variationToEdit.setName(variationRequestDto.getName());
-        if (variationRequestDto.getCategory_id() != null){
-            ProductCategory productCategory = productCategoryService.getProductCategory(variationRequestDto.getCategory_id());
+        if (variationRequestDto.getCategoryId() != null){
+            ProductCategory productCategory = productCategoryService.getProductCategory(variationRequestDto.getCategoryId());
             variationToEdit.setProductCategory(productCategory);
         }
 

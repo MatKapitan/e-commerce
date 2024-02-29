@@ -24,8 +24,8 @@ public class SiteUserServiceImpl implements SiteUserService {
         SiteUser siteUser = new SiteUser();
         siteUser.setUsername(siteUserRequestDto.getUsername());
         siteUser.setPassword(siteUserRequestDto.getPassword());
-        siteUser.setEmail_address(siteUserRequestDto.getEmail_address());
-        siteUser.setPhone_number(siteUserRequestDto.getPhone_number());
+        siteUser.setEmail_address(siteUserRequestDto.getEmailAddress());
+        siteUser.setPhone_number(siteUserRequestDto.getPhoneNumber());
 
         return siteUserRepository.save(siteUser);
     }
@@ -57,8 +57,8 @@ public class SiteUserServiceImpl implements SiteUserService {
         SiteUser siteUser = getSiteUser(siteUserId);
         siteUser.setUsername(siteUserRequestDto.getUsername());
         siteUser.setPassword(siteUserRequestDto.getPassword());
-        siteUser.setEmail_address(siteUserRequestDto.getEmail_address());
-        siteUser.setPhone_number(siteUserRequestDto.getPhone_number());
+        siteUser.setEmail_address(siteUserRequestDto.getEmailAddress());
+        siteUser.setPhone_number(siteUserRequestDto.getPhoneNumber());
 
         return siteUserRepository.save(siteUser);
     }

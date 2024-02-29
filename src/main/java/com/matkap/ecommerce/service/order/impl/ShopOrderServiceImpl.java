@@ -50,22 +50,22 @@ public class ShopOrderServiceImpl implements ShopOrderService {
         //create order
         ShopOrder shopOrder = new ShopOrder();
         shopOrder.setOrder_date(new Timestamp(System.currentTimeMillis()));
-        shopOrder.setOrderStatus(orderStatusRepository.findByStatus("Drafted"));
+        shopOrder.setOrderStatus(orderStatusRepository.findByStatus("Ordered"));
         Long siteUserId = shopOrderRequestDto.getSiteUserId();
         shopOrder.setSiteUser(siteUserService.getSiteUser(siteUserId));
         shopOrder.setAddress(addressService.getAddress(shopOrderRequestDto.getAddressId()));
         shopOrder.setUserPaymentMethod(userPaymentMethodService.getUserPaymentMethod(shopOrderRequestDto.getUserPaymentMethodId()));  // TODO can create order without having to have payment method first
         shopOrder.setShippingMethod(getShippingMethod(shopOrderRequestDto.getShippingMethodId()));
-        ShopOrder save = shopOrderRepository.save(shopOrder);
+        shopOrderRepository.save(shopOrder);
         // shoppingCard into orderLine
 
         BigDecimal orderLineTotal = orderLineService.shoppingCardToShopOrder(siteUserId, shopOrder);
-        ShopOrder shopOrderQ = getShopOrder(save.getId());  //TODO UHHHHHHHHHHHHHHHH order lines still null
-        List<OrderLine> orderLines = shopOrderQ.getOrderLines();
+//        ShopOrder shopOrderQ = getShopOrder(shopOrder.getId());  //TODO UHHHHHHHHHHHHHHHH order lines still null
+//        List<OrderLine> orderLines = shopOrderQ.getOrderLines();
 //        BigDecimal orderLineTotal = calculatePrice(orderLines);
-        BigDecimal shippingPrice = shopOrderQ.getShippingMethod().getPrice();
-        shopOrderQ.setOrderTotal(orderLineTotal.add(shippingPrice));
-        return shopOrderRepository.save(shopOrderQ);
+        BigDecimal shippingPrice = shopOrder.getShippingMethod().getPrice();
+        shopOrder.setOrderTotal(orderLineTotal.add(shippingPrice));
+        return shopOrderRepository.save(shopOrder);
     }
 
 //    private BigDecimal calculatePrice(List<OrderLine> orderLines){

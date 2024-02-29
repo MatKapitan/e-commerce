@@ -36,15 +36,15 @@ public class ProductItemServiceImpl implements ProductItemService {
     public ProductItemResponseDto createProductItem(ProductItemRequestDto productItemRequestDto) {
 
         ProductItem productItem = new ProductItem();
-        productItem.setSKU(productItemRequestDto.getSKU());
-        productItem.setQty_in_stock(productItemRequestDto.getQty_in_stock());
-        productItem.setProduct_image(productItemRequestDto.getProduct_image());
+        productItem.setSKU(productItemRequestDto.getSku());
+        productItem.setQty_in_stock(productItemRequestDto.getQuantityInStock());
+        productItem.setProduct_image(productItemRequestDto.getProductImage());
         productItem.setPrice(productItemRequestDto.getPrice());
 
-        if(productItemRequestDto.getProduct_id() == null){
+        if(productItemRequestDto.getProductId() == null){
             throw new IllegalArgumentException("Product has to have a category");
         }
-        Product product = productService.getProduct(productItemRequestDto.getProduct_id());
+        Product product = productService.getProduct(productItemRequestDto.getProductId());
         productItem.setProduct(product);
         productItemRepository.save(productItem);
 
@@ -78,15 +78,15 @@ public class ProductItemServiceImpl implements ProductItemService {
     @Override
     public ProductItemResponseDto editProductItem(Long productItemId, ProductItemRequestDto productItemRequestDto) {
         ProductItem productItemToEdit = getProductItem(productItemId);
-        productItemToEdit.setSKU(productItemRequestDto.getSKU());
-        productItemToEdit.setQty_in_stock(productItemRequestDto.getQty_in_stock());
-        productItemToEdit.setProduct_image(productItemRequestDto.getProduct_image());
+        productItemToEdit.setSKU(productItemRequestDto.getSku());
+        productItemToEdit.setQty_in_stock(productItemRequestDto.getQuantityInStock());
+        productItemToEdit.setProduct_image(productItemRequestDto.getProductImage());
         productItemToEdit.setPrice(productItemRequestDto.getPrice());
 
-        if(productItemRequestDto.getProduct_id() == null){
+        if(productItemRequestDto.getProductId() == null){
             throw new IllegalArgumentException("Product has to have a category");
         }
-        Product product = productService.getProduct(productItemRequestDto.getProduct_id());
+        Product product = productService.getProduct(productItemRequestDto.getProductId());
         productItemToEdit.setProduct(product);
 
         return Mapper.productItemToProductItemResponseDto(productItemToEdit);

@@ -1,20 +1,29 @@
 package com.matkap.ecommerce.dto.requestDto.product;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.sql.Timestamp;
 
 public class PromotionRequestDto {
 
+    @NotBlank(message = "name cannot be blank")
     private String name;
+    @NotBlank(message = "description cannot be blank")
     private String description;
-    private Double discount_rate;
+    @NotNull(message = "discountRate cannot be null")
+    @Positive(message = "discountRate must be positive")
+    private Double discountRate;
+    @NotNull(message = "startDate cannot be null")
     @JsonFormat(pattern="yyyy-MM-dd")
-    private Timestamp start_date;
+    private Timestamp startDate;
+    @NotNull(message = "endDate cannot be null")
     @JsonFormat(pattern="yyyy-MM-dd")
-    private Timestamp end_date;
+    private Timestamp endDate;
 
-    private Long productCategoryId;
 
 
     public PromotionRequestDto() {
@@ -37,35 +46,28 @@ public class PromotionRequestDto {
         this.description = description;
     }
 
-    public Double getDiscount_rate() {
-        return discount_rate;
+    public Double getDiscountRate() {
+        return discountRate;
     }
 
-    public void setDiscount_rate(Double discount_rate) {
-        this.discount_rate = discount_rate;
+    public void setDiscountRate(Double discountRate) {
+        this.discountRate = discountRate;
     }
 
-    public Timestamp getStart_date() {
-        return start_date;
+    public Timestamp getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(Timestamp start_date) {
-        this.start_date = start_date;
+    public void setStartDate(Timestamp startDate) {
+        this.startDate = startDate;
     }
 
-    public Timestamp getEnd_date() {
-        return end_date;
+    public Timestamp getEndDate() {
+        return endDate;
     }
 
-    public void setEnd_date(Timestamp end_date) {
-        this.end_date = end_date;
+    public void setEndDate(Timestamp endDate) {
+        this.endDate = endDate;
     }
 
-    public Long getProductCategoryId() {
-        return productCategoryId;
-    }
-
-    public void setProductCategoryId(Long productCategoryId) {
-        this.productCategoryId = productCategoryId;
-    }
 }

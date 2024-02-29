@@ -31,8 +31,8 @@ private final VariationService variationService;
     public VariationOptionResponseDto createVariationOption(VariationOptionRequestDto variationOptionRequestDto) {
         VariationOption variationOption = new VariationOption();
         variationOption.setValue(variationOptionRequestDto.getValue());
-        if (variationOptionRequestDto.getVariation_id() != null){
-            Variation variation = variationService.getVariation(variationOptionRequestDto.getVariation_id());
+        if (variationOptionRequestDto.getVariationId() != null){
+            Variation variation = variationService.getVariation(variationOptionRequestDto.getVariationId());
             variationOption.setVariation(variation);
         }
         variationOptionRepository.save(variationOption);
@@ -68,8 +68,8 @@ private final VariationService variationService;
                                                           VariationOptionRequestDto variationOptionRequestDto) {
         VariationOption variationOption = getVariationOption(validationOptionId);
         variationOption.setValue(variationOptionRequestDto.getValue());
-        if (variationOptionRequestDto.getVariation_id() != null){
-            Variation variation = variationService.getVariation(variationOptionRequestDto.getVariation_id());
+        if (variationOptionRequestDto.getVariationId() != null){
+            Variation variation = variationService.getVariation(variationOptionRequestDto.getVariationId());
             variationOption.setVariation(variation);
         }
         return Mapper.variationOptionToVariationOptionResponseDto(variationOption);

@@ -4,6 +4,7 @@ package com.matkap.ecommerce.controller.product;
 import com.matkap.ecommerce.dto.requestDto.product.ProductCategoryRequestDto;
 import com.matkap.ecommerce.dto.responseDto.product.ProductCategoryResponseDto;
 import com.matkap.ecommerce.service.product.ProductCategoryService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/productcategory")
+@RequestMapping("/product-category")
 public class ProductCategoryController {
 
     private final ProductCategoryService productCategoryService;
@@ -21,7 +22,7 @@ public class ProductCategoryController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<ProductCategoryResponseDto> addProductCategory(@RequestBody ProductCategoryRequestDto productCategoryRequestDto){
+    public ResponseEntity<ProductCategoryResponseDto> addProductCategory(@Valid @RequestBody ProductCategoryRequestDto productCategoryRequestDto){
         ProductCategoryResponseDto productCategoryResponseDto = productCategoryService.createProductCategory(productCategoryRequestDto);
         return new ResponseEntity<>(productCategoryResponseDto, HttpStatus.OK);
     }
@@ -46,7 +47,7 @@ public class ProductCategoryController {
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<ProductCategoryResponseDto> editProductCategory(@PathVariable Long product_category_id,
-                                                                          @RequestBody ProductCategoryRequestDto productCategoryRequestDto){
+                                                                          @Valid @RequestBody ProductCategoryRequestDto productCategoryRequestDto){
         ProductCategoryResponseDto productCategoryResponseDto = productCategoryService.editProductCategory(product_category_id, productCategoryRequestDto);
         return new ResponseEntity<>(productCategoryResponseDto, HttpStatus.OK);
     }

@@ -32,7 +32,7 @@ public class ProductCategory {
     private String category_name;
 
     @ManyToMany(mappedBy = "productCategory")
-    private List<Promotion> promotions;
+    private List<Promotion> promotions = new ArrayList<>();
 
 
 

@@ -1,19 +1,28 @@
 package com.matkap.ecommerce.dto.requestDto.user;
 
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class AddressRequestDto {
 
-    private Long siteUser_id;
-    private Boolean defaultAddress;
-    private String unit_number;
-    private String street_number;
-    private String address_line1;
-    private String address_line2;
+    @NotNull(message = "siteUserId cannot be null")
+    private Long siteUserId;
+    @NotBlank(message = "unitNumber cannot be blank")
+    private String unitNumber;
+    @NotBlank(message = "streetNumber cannot be blank")
+    private String streetNumber;
+    @NotBlank(message = "addressLine1 cannot be blank")
+    private String addressLine1;
+    private String addressLine2;
+    @NotBlank(message = "city cannot be blank")
     private String city;
+    @NotBlank(message = "region cannot be blank")
     private String region;
-    private String postal_code;
-
-    private Long country_id;
+    @NotBlank(message = "postalCode cannot be blank")
+    private String postalCode;
+    @NotNull(message = "countryId cannot be null")
+    private Long countryId;
 
 
 
@@ -23,52 +32,44 @@ public class AddressRequestDto {
     public AddressRequestDto() {
     }
 
-    public Long getSiteUser_id() {
-        return siteUser_id;
+    public Long getSiteUserId() {
+        return siteUserId;
     }
 
-    public void setSiteUser_id(Long siteUser_id) {
-        this.siteUser_id = siteUser_id;
+    public void setSiteUserId(Long siteUserId) {
+        this.siteUserId = siteUserId;
     }
 
-    public Boolean getDefaultAddress() {
-        return defaultAddress;
+    public String getUnitNumber() {
+        return unitNumber;
     }
 
-    public void setDefaultAddress(Boolean defaultAddress) {
-        this.defaultAddress = defaultAddress;
+    public void setUnitNumber(String unitNumber) {
+        this.unitNumber = unitNumber;
     }
 
-    public String getUnit_number() {
-        return unit_number;
+    public String getStreetNumber() {
+        return streetNumber;
     }
 
-    public void setUnit_number(String unit_number) {
-        this.unit_number = unit_number;
+    public void setStreetNumber(String streetNumber) {
+        this.streetNumber = streetNumber;
     }
 
-    public String getStreet_number() {
-        return street_number;
+    public String getAddressLine1() {
+        return addressLine1;
     }
 
-    public void setStreet_number(String street_number) {
-        this.street_number = street_number;
+    public void setAddressLine1(String addressLine1) {
+        this.addressLine1 = addressLine1;
     }
 
-    public String getAddress_line1() {
-        return address_line1;
+    public String getAddressLine2() {
+        return addressLine2;
     }
 
-    public void setAddress_line1(String address_line1) {
-        this.address_line1 = address_line1;
-    }
-
-    public String getAddress_line2() {
-        return address_line2;
-    }
-
-    public void setAddress_line2(String address_line2) {
-        this.address_line2 = address_line2;
+    public void setAddressLine2(String addressLine2) {
+        this.addressLine2 = addressLine2;
     }
 
     public String getCity() {
@@ -87,19 +88,19 @@ public class AddressRequestDto {
         this.region = region;
     }
 
-    public String getPostal_code() {
-        return postal_code;
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    public void setPostal_code(String postal_code) {
-        this.postal_code = postal_code;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
-    public Long getCountry_id() {
-        return country_id;
+    public Long getCountryId() {
+        return countryId;
     }
 
-    public void setCountry_id(Long country_id) {
-        this.country_id = country_id;
+    public void setCountryId(Long countryId) {
+        this.countryId = countryId;
     }
 }

@@ -3,6 +3,7 @@ package com.matkap.ecommerce.controller.product;
 import com.matkap.ecommerce.dto.requestDto.product.VariationOptionRequestDto;
 import com.matkap.ecommerce.dto.responseDto.product.VariationOptionResponseDto;
 import com.matkap.ecommerce.service.product.VariationOptionService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ private final VariationOptionService variationOptionService;
     }
 
     @PostMapping("/add")
-    public ResponseEntity<VariationOptionResponseDto> addVariationOption(@RequestBody VariationOptionRequestDto variationOptionRequestDto){
+    public ResponseEntity<VariationOptionResponseDto> addVariationOption(@Valid @RequestBody VariationOptionRequestDto variationOptionRequestDto){
         VariationOptionResponseDto variationOptionResponseDto = variationOptionService.createVariationOption(variationOptionRequestDto);
         return new ResponseEntity<>(variationOptionResponseDto, HttpStatus.OK);
     }
@@ -45,7 +46,7 @@ private final VariationOptionService variationOptionService;
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<VariationOptionResponseDto> editVariationOption(@PathVariable Long id,
-                                                                          @RequestBody VariationOptionRequestDto variationOptionRequestDto){
+                                                                          @Valid @RequestBody VariationOptionRequestDto variationOptionRequestDto){
         VariationOptionResponseDto variationOptionResponseDto = variationOptionService.editVariationOption(id, variationOptionRequestDto);
         return new ResponseEntity<>(variationOptionResponseDto, HttpStatus.OK);
     }

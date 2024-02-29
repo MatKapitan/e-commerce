@@ -4,6 +4,7 @@ package com.matkap.ecommerce.controller.product;
 import com.matkap.ecommerce.dto.requestDto.product.ProductItemRequestDto;
 import com.matkap.ecommerce.dto.responseDto.product.ProductItemResponseDto;
 import com.matkap.ecommerce.service.product.ProductItemService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/productitem")
+@RequestMapping("/product-item")
 public class ProductItemController {
 
     private final ProductItemService productItemService;
@@ -23,7 +24,7 @@ public class ProductItemController {
 
 
     @PostMapping("/add")
-    public ResponseEntity<ProductItemResponseDto> addProductItem(@RequestBody ProductItemRequestDto productItemRequestDto){
+    public ResponseEntity<ProductItemResponseDto> addProductItem(@Valid @RequestBody ProductItemRequestDto productItemRequestDto){
         ProductItemResponseDto productItemResponseDto = productItemService.createProductItem(productItemRequestDto);
         return new ResponseEntity<>(productItemResponseDto, HttpStatus.OK);
     }
@@ -48,7 +49,7 @@ public class ProductItemController {
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<ProductItemResponseDto> editProductItem(@PathVariable Long id,
-                                                                  @RequestBody ProductItemRequestDto productItemRequestDto){
+                                                                  @Valid @RequestBody ProductItemRequestDto productItemRequestDto){
         ProductItemResponseDto productItemResponseDto = productItemService.editProductItem(id, productItemRequestDto);
         return new ResponseEntity<>(productItemResponseDto, HttpStatus.OK);
     }

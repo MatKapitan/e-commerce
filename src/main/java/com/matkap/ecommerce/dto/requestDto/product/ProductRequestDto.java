@@ -1,14 +1,17 @@
 package com.matkap.ecommerce.dto.requestDto.product;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class ProductRequestDto {
-
+    @NotBlank(message = "Name cannot be blank")
     private String name;
-
+    @NotBlank(message = "Description cannot be blank")
     private String description;
-
-    private String product_image;
-
-    private Long product_category_id;
+    @NotBlank(message = "productImage cannot be blank")
+    private String productImage;
+    @NotNull(message = "productCategoryId cannot be null")
+    private Long productCategoryId;
 
     public ProductRequestDto() {
     }
@@ -16,7 +19,7 @@ public class ProductRequestDto {
     public ProductRequestDto(String name, String description, String product_image) {
         this.name = name;
         this.description = description;
-        this.product_image = product_image;
+        this.productImage = product_image;
     }
 
     public String getName() {
@@ -35,19 +38,21 @@ public class ProductRequestDto {
         this.description = description;
     }
 
-    public String getProduct_image() {
-        return product_image;
+    public String getProductImage() {
+        return productImage;
     }
 
-    public void setProduct_image(String product_image) {
-        this.product_image = product_image;
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 
-    public Long getProduct_category_id() {
-        return product_category_id;
+    public Long getProductCategoryId() {
+        return productCategoryId;
     }
 
-    public void setProduct_category_id(Long product_category_id) {
-        this.product_category_id = product_category_id;
+    public void setProductCategoryId(Long productCategoryId) {
+        this.productCategoryId = productCategoryId;
     }
+
+
 }

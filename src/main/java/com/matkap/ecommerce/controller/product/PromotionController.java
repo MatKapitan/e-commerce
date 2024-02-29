@@ -4,6 +4,7 @@ package com.matkap.ecommerce.controller.product;
 import com.matkap.ecommerce.dto.requestDto.product.PromotionRequestDto;
 import com.matkap.ecommerce.model.product.Promotion;
 import com.matkap.ecommerce.service.product.PromotionService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -24,7 +25,7 @@ public class PromotionController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<Promotion> createPromotion(@RequestBody PromotionRequestDto promotionRequestDto){
+    public ResponseEntity<Promotion> createPromotion(@Valid @RequestBody PromotionRequestDto promotionRequestDto){
         Promotion promotion = promotionService.createPromotion(promotionRequestDto);
         return new ResponseEntity<>(promotion, HttpStatus.OK);
     }
@@ -49,7 +50,8 @@ public class PromotionController {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<Promotion> updatePromotion(@PathVariable Long id, @RequestBody PromotionRequestDto promotionRequestDto){
+    public ResponseEntity<Promotion> updatePromotion(@PathVariable Long id,
+                                                     @Valid @RequestBody PromotionRequestDto promotionRequestDto){
         Promotion promotion = promotionService.updatePromotion(promotionRequestDto, id);
         return new ResponseEntity<>(promotion, HttpStatus.OK);
     }

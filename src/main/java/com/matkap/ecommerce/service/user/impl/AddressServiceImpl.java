@@ -34,16 +34,16 @@ public class AddressServiceImpl implements AddressService {
     @Transactional
     public Address createAddress(AddressRequestDto addressRequestDto) {
         Address address = new Address();
-        address.setSiteUser(siteUserService.getSiteUser(addressRequestDto.getSiteUser_id()));
-        Country country = getCountry(addressRequestDto.getCountry_id());
+        address.setSiteUser(siteUserService.getSiteUser(addressRequestDto.getSiteUserId()));
+        Country country = getCountry(addressRequestDto.getCountryId());
         address.setCountry(country);
-        address.setUnitNumber(addressRequestDto.getUnit_number());
-        address.setStreetNumber(addressRequestDto.getStreet_number());
-        address.setAddressLine1(addressRequestDto.getAddress_line1());
-        address.setAddressLine2(addressRequestDto.getAddress_line2());
+        address.setUnitNumber(addressRequestDto.getUnitNumber());
+        address.setStreetNumber(addressRequestDto.getStreetNumber());
+        address.setAddressLine1(addressRequestDto.getAddressLine1());
+        address.setAddressLine2(addressRequestDto.getAddressLine2());
         address.setCity(addressRequestDto.getCity());
         address.setRegion(addressRequestDto.getRegion());
-        address.setPostalCode(addressRequestDto.getPostal_code());
+        address.setPostalCode(addressRequestDto.getPostalCode());
 
         return addressRepository.save(address);
     }
@@ -85,16 +85,16 @@ public class AddressServiceImpl implements AddressService {
 
     public Address editAddress(Long addressId, AddressRequestDto addressRequestDto) {
         Address address = getAddress(addressId);
-        address.setSiteUser(siteUserService.getSiteUser(addressRequestDto.getSiteUser_id()));
-        Country country = getCountry(addressRequestDto.getCountry_id());
+        address.setSiteUser(siteUserService.getSiteUser(addressRequestDto.getSiteUserId()));
+        Country country = getCountry(addressRequestDto.getCountryId());
         address.setCountry(country);
-        address.setUnitNumber(addressRequestDto.getUnit_number());
-        address.setStreetNumber(addressRequestDto.getStreet_number());
-        address.setAddressLine1(addressRequestDto.getAddress_line1());
-        address.setAddressLine2(addressRequestDto.getAddress_line2());
+        address.setUnitNumber(addressRequestDto.getUnitNumber());
+        address.setStreetNumber(addressRequestDto.getStreetNumber());
+        address.setAddressLine1(addressRequestDto.getAddressLine1());
+        address.setAddressLine2(addressRequestDto.getAddressLine2());
         address.setCity(addressRequestDto.getCity());
         address.setRegion(addressRequestDto.getRegion());
-        address.setPostalCode(addressRequestDto.getPostal_code());
+        address.setPostalCode(addressRequestDto.getPostalCode());
         addressRepository.save(address);
         return address;
     }

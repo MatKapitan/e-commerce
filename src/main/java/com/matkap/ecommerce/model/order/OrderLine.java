@@ -1,5 +1,6 @@
 package com.matkap.ecommerce.model.order;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.matkap.ecommerce.model.product.ProductItem;
 import jakarta.persistence.*;
 
@@ -10,6 +11,7 @@ public class OrderLine {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
 
@@ -17,6 +19,7 @@ public class OrderLine {
     @JoinColumn(name = "product_item_id")
     private ProductItem productItem;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "shop_order_id")
     private ShopOrder shopOrder;

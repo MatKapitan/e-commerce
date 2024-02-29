@@ -9,6 +9,7 @@ import com.matkap.ecommerce.model.product.Promotion;
 import com.matkap.ecommerce.model.shopingCard.ShoppingCard;
 import com.matkap.ecommerce.repository.order.OrderLineRepository;
 import com.matkap.ecommerce.service.order.OrderLineService;
+import com.matkap.ecommerce.service.product.ProductItemService;
 import com.matkap.ecommerce.service.shopingCard.ShoppingCardService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -23,10 +24,12 @@ public class OrderLineServiceImpl implements OrderLineService {
 
     private final OrderLineRepository orderLineRepository;
     private final ShoppingCardService shoppingCardService;
+    private final ProductItemService productItemService;
 
-    public OrderLineServiceImpl(OrderLineRepository orderLineRepository, ShoppingCardService shoppingCardService) {
+    public OrderLineServiceImpl(OrderLineRepository orderLineRepository, ShoppingCardService shoppingCardService, ProductItemService productItemService) {
         this.orderLineRepository = orderLineRepository;
         this.shoppingCardService = shoppingCardService;
+        this.productItemService = productItemService;
     }
 
 
@@ -42,15 +45,16 @@ public class OrderLineServiceImpl implements OrderLineService {
             BigDecimal price = calculatePrice(shoppingcard.getProductItem());
             orderLine.setPrice(price);
 
-            totalPrice = totalPrice.add(price);
-            OrderLine save = orderLineRepository.save(orderLine);
-            shoppingCardService.deleteShoppingCard(shoppingcard.getId());
-        }return totalPrice;
+            BigDecimal quantity = new BigDecimal(shoppingcard.getQuantity());
+            totalPrice = totalPrice.add(price).multiply(quantity);
+            orderLineRepository.save(orderLine);
+            shoppingCardService.deleteShoppingCard(shoppingcard.getId());}
+        return totalPrice;
     }
 
     private BigDecimal calculatePrice(ProductItem productItem){
         BigDecimal price = productItem.getPrice();
-        List<Promotion> promotions = productItem.getProduct().getProductCategory().getPromotions();
+        List<Promotion> promotions = productItem.getProduct().getProductCategory().getPromotions(); //TODO jpa GetActivePromotions
         if (promotions.isEmpty()) return price;
 
         Double maxDiscountRate = findMaxPromotion(promotions);

@@ -1,10 +1,17 @@
 package com.matkap.ecommerce.dto.requestDto.order;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class ShopOrderRequestDto {
 
+    @NotNull(message = "siteUserId cannot be null")
     private Long siteUserId;
+    @NotNull(message = "userPaymentMethodId cannot be null")
     private Long userPaymentMethodId;
+    @NotNull(message = "addressId cannot be null")
     private Long addressId;
+    @NotNull(message = "shippingMethodId cannot be null")
     private Long shippingMethodId;
 
 

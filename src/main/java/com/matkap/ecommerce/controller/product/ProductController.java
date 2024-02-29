@@ -3,6 +3,7 @@ package com.matkap.ecommerce.controller.product;
 import com.matkap.ecommerce.dto.requestDto.product.ProductRequestDto;
 import com.matkap.ecommerce.dto.responseDto.product.ProductResponseDto;
 import com.matkap.ecommerce.service.product.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class ProductController {
 
 
     @PostMapping("/add")
-    public ResponseEntity<ProductResponseDto> addProduct(@RequestBody ProductRequestDto productRequestDto){
+    public ResponseEntity<ProductResponseDto> addProduct(@Valid @RequestBody ProductRequestDto productRequestDto){
         ProductResponseDto productResponseDto = productService.createProduct(productRequestDto);
         return new ResponseEntity<>(productResponseDto, HttpStatus.OK);
     }
@@ -49,7 +50,7 @@ public class ProductController {
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<ProductResponseDto> editProduct(@PathVariable Long id,
-                                                          @RequestBody ProductRequestDto productRequestDto){
+                                                          @Valid @RequestBody ProductRequestDto productRequestDto){
         ProductResponseDto productResponseDto = productService.editProduct(id, productRequestDto);
         return new ResponseEntity<>(productResponseDto, HttpStatus.OK);
     }

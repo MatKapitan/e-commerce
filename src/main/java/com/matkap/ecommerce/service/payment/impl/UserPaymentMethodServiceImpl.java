@@ -38,7 +38,7 @@ private final SiteUserService siteUserService;
         userPaymentMethod.setProvider(userPaymentMethodRequestDto.getProvider());
         userPaymentMethod.setAccountNumber(userPaymentMethodRequestDto.getAccountNumber());
         userPaymentMethod.setExpiryDate(userPaymentMethodRequestDto.getExpiryDate());
-        userPaymentMethod.setDefaultPayment(userPaymentMethodRequestDto.getDefaultPayment()); //TODO one true unique
+        userPaymentMethod.setDefaultPayment(false);
 
         return userPaymentMethodRepository.save(userPaymentMethod);
     }
@@ -86,7 +86,7 @@ private final SiteUserService siteUserService;
         userPaymentMethod.setProvider(userPaymentMethodRequestDto.getProvider());
         userPaymentMethod.setAccountNumber(userPaymentMethodRequestDto.getAccountNumber());
         userPaymentMethod.setExpiryDate(userPaymentMethodRequestDto.getExpiryDate());
-        userPaymentMethod.setDefaultPayment(userPaymentMethodRequestDto.getDefaultPayment()); //TODO one true unique
+        userPaymentMethod.setDefaultPayment(false); //TODO one true unique
 
         return userPaymentMethodRepository.save(userPaymentMethod);
     }

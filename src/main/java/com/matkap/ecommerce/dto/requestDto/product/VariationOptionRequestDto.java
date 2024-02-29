@@ -1,20 +1,25 @@
 package com.matkap.ecommerce.dto.requestDto.product;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class VariationOptionRequestDto {
 
-    private Long variation_id;
+    @NotNull(message = "variationId cannot be null")
+    private Long variationId;
+    @NotBlank(message = "value cannot be blank")
     private String value;
 
 
     public VariationOptionRequestDto() {
     }
 
-    public Long getVariation_id() {
-        return variation_id;
+    public Long getVariationId() {
+        return variationId;
     }
 
-    public void setVariation_id(Long variation_id) {
-        this.variation_id = variation_id;
+    public void setVariationId(Long variationId) {
+        this.variationId = variationId;
     }
 
     public String getValue() {

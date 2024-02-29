@@ -6,6 +6,7 @@ import com.matkap.ecommerce.model.user.Address;
 import com.matkap.ecommerce.model.user.Country;
 import com.matkap.ecommerce.service.user.AddressService;
 import jakarta.persistence.Entity;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class AddressController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<Address> createAddress(@RequestBody AddressRequestDto addressRequestDto){
+    public ResponseEntity<Address> createAddress(@Valid @RequestBody AddressRequestDto addressRequestDto){
         Address address = addressService.createAddress(addressRequestDto);
         return new ResponseEntity<>(address, HttpStatus.OK);
     }
@@ -55,7 +56,7 @@ public class AddressController {
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<Address> editAddress(@PathVariable Long id,
-                                               @RequestBody AddressRequestDto addressRequestDto){
+                                               @Valid @RequestBody AddressRequestDto addressRequestDto){
         Address address = addressService.editAddress(id, addressRequestDto);
         return new ResponseEntity<>(address, HttpStatus.OK);
     }

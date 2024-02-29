@@ -1,19 +1,28 @@
 package com.matkap.ecommerce.dto.requestDto.product;
 
 
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 import java.math.BigDecimal;
 
 public class ProductItemRequestDto {
 
-    private String SKU;
-
-    private Long qty_in_stock;
-
-    private String product_image;
-
+    @NotBlank(message = "SKU cannot be blank")
+    private String sku;
+    @NotNull(message = "quantityInStock cannot be null")
+    @Positive(message = "quantityInStock must be positive")
+    private Long quantityInStock;
+    @NotBlank(message = "productImage cannot be blank")
+    private String productImage;
+    @NotNull(message = "price cannot be blank")
+    @Positive(message = "price must be positive")
+    @Digits(integer = 10, fraction = 2, message = "price can have only 2 decimal places")
     private BigDecimal price;
-
-    private Long product_id;
+    @NotNull(message = "productId cannot be null")
+    private Long productId;
 
 
     public ProductItemRequestDto() {
@@ -21,28 +30,28 @@ public class ProductItemRequestDto {
 
 
 
-    public String getSKU() {
-        return SKU;
+    public String getSku() {
+        return sku;
     }
 
-    public void setSKU(String SKU) {
-        this.SKU = SKU;
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 
-    public Long getQty_in_stock() {
-        return qty_in_stock;
+    public Long getQuantityInStock() {
+        return quantityInStock;
     }
 
-    public void setQty_in_stock(Long qty_in_stock) {
-        this.qty_in_stock = qty_in_stock;
+    public void setQuantityInStock(Long quantityInStock) {
+        this.quantityInStock = quantityInStock;
     }
 
-    public String getProduct_image() {
-        return product_image;
+    public String getProductImage() {
+        return productImage;
     }
 
-    public void setProduct_image(String product_image) {
-        this.product_image = product_image;
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 
     public BigDecimal getPrice() {
@@ -53,12 +62,12 @@ public class ProductItemRequestDto {
         this.price = price;
     }
 
-    public Long getProduct_id() {
-        return product_id;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(Long product_id) {
-        this.product_id = product_id;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
 }

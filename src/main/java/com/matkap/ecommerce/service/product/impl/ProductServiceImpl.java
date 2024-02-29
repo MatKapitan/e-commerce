@@ -31,11 +31,11 @@ public class ProductServiceImpl implements ProductService {
         Product product = new Product();
         product.setName(productRequestDto.getName());
         product.setDescription(productRequestDto.getDescription());
-        product.setProduct_image(productRequestDto.getProduct_image());
-        if (productRequestDto.getProduct_category_id() == null){
+        product.setProduct_image(productRequestDto.getProductImage());
+        if (productRequestDto.getProductCategoryId() == null){
             throw new IllegalArgumentException("Product has to have a category");
         }
-        product.setProductCategory(productCategoryService.getProductCategory(productRequestDto.getProduct_category_id()));
+        product.setProductCategory(productCategoryService.getProductCategory(productRequestDto.getProductCategoryId()));
         productRepository.save(product);
 
         return Mapper.productToProductResponseDto(product);
@@ -70,11 +70,11 @@ public class ProductServiceImpl implements ProductService {
         Product productToEdit = getProduct(productId);
         productToEdit.setName(productRequestDto.getName());
         productToEdit.setDescription(productRequestDto.getDescription());
-        productToEdit.setProduct_image(productRequestDto.getProduct_image());
-        if (productRequestDto.getProduct_category_id() == null){
+        productToEdit.setProduct_image(productRequestDto.getProductImage());
+        if (productRequestDto.getProductCategoryId() == null){
             throw new IllegalArgumentException("Product has to have a category");
         }
-        productToEdit.setProductCategory(productCategoryService.getProductCategory(productRequestDto.getProduct_category_id()));
+        productToEdit.setProductCategory(productCategoryService.getProductCategory(productRequestDto.getProductCategoryId()));
 
         return Mapper.productToProductResponseDto(productToEdit);
     }

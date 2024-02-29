@@ -18,6 +18,7 @@ public class ProductItem {
 
     private String SKU;
 
+    @Column(name = "qty_in_stock")
     private Long qty_in_stock;
 
     private String product_image;

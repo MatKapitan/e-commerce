@@ -25,9 +25,9 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     @Override
     public ProductCategoryResponseDto createProductCategory(ProductCategoryRequestDto productCategoryRequestDto) {
         ProductCategory productCategory  = new ProductCategory();
-        productCategory.setCategory_name(productCategoryRequestDto.getCategory_name());
-        if (productCategoryRequestDto.getParent_category_id() != null) {
-            productCategory.setParent_category(getProductCategory(productCategoryRequestDto.getParent_category_id()));
+        productCategory.setCategory_name(productCategoryRequestDto.getCategoryName());
+        if (productCategoryRequestDto.getParentCategoryId() != null) {
+            productCategory.setParent_category(getProductCategory(productCategoryRequestDto.getParentCategoryId()));
         }
         productCategoryRepository.save(productCategory);
         return Mapper.productCategoryToProductCategoryResponseDto(productCategory);
@@ -61,9 +61,9 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     @Override
     public ProductCategoryResponseDto editProductCategory(Long productCategoryId, ProductCategoryRequestDto productCategoryRequestDto) {
         ProductCategory productCategory = getProductCategory(productCategoryId);
-        productCategory.setCategory_name(productCategoryRequestDto.getCategory_name());
-        if(productCategoryRequestDto.getParent_category_id() != null){
-            productCategory.setParent_category(getProductCategory(productCategoryRequestDto.getParent_category_id()));
+        productCategory.setCategory_name(productCategoryRequestDto.getCategoryName());
+        if(productCategoryRequestDto.getParentCategoryId() != null){
+            productCategory.setParent_category(getProductCategory(productCategoryRequestDto.getParentCategoryId()));
         }
         return Mapper.productCategoryToProductCategoryResponseDto(productCategory);
     }

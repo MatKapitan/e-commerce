@@ -3,6 +3,7 @@ package com.matkap.ecommerce.controller.shoppingCard;
 import com.matkap.ecommerce.dto.requestDto.shoppingCard.ShoppingCardRequestDto;
 import com.matkap.ecommerce.model.shopingCard.ShoppingCard;
 import com.matkap.ecommerce.service.shopingCard.ShoppingCardService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class ShoppingCardController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ShoppingCard> createShoppingCard(@RequestBody ShoppingCardRequestDto shoppingCardRequestDto){
+    public ResponseEntity<ShoppingCard> createShoppingCard(@Valid @RequestBody ShoppingCardRequestDto shoppingCardRequestDto){
         ShoppingCard shoppingCard = shoppingCardService.createShoppingCard(shoppingCardRequestDto);
         return new ResponseEntity<>(shoppingCard, HttpStatus.OK);
     }
@@ -44,7 +45,7 @@ public class ShoppingCardController {
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<ShoppingCard> editShoppingCard(@PathVariable Long id,
-                                                         @RequestBody ShoppingCardRequestDto shoppingCardRequestDto){
+                                                         @Valid @RequestBody ShoppingCardRequestDto shoppingCardRequestDto){
         ShoppingCard shoppingCard = shoppingCardService.editShoppingCard(id, shoppingCardRequestDto);
         return new ResponseEntity<>(shoppingCard, HttpStatus.OK);
     }

@@ -1,10 +1,17 @@
 package com.matkap.ecommerce.dto.requestDto.review;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class UserReviewRequestDto {
 
+    @NotNull(message = "siteUserId cannot be null")
     private Long siteUserId;
+    @NotNull(message = "shopOrderId cannot be null")
     private Long shopOrderId;
-    private Long rating_value;
+    @NotNull(message = "ratingValue cannot be null")
+    private Long ratingValue;
+    @NotBlank(message = "comment cannot be blank")
     private String comment;
 
 
@@ -29,12 +36,12 @@ public class UserReviewRequestDto {
         this.shopOrderId = shopOrderId;
     }
 
-    public Long getRating_value() {
-        return rating_value;
+    public Long getRatingValue() {
+        return ratingValue;
     }
 
-    public void setRating_value(Long rating_value) {
-        this.rating_value = rating_value;
+    public void setRatingValue(Long ratingValue) {
+        this.ratingValue = ratingValue;
     }
 
     public String getComment() {

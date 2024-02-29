@@ -1,20 +1,29 @@
 package com.matkap.ecommerce.dto.requestDto.payment;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.matkap.ecommerce.model.payment.PaymentType;
 import com.matkap.ecommerce.model.user.SiteUser;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.sql.Timestamp;
 
 public class UserPaymentMethodRequestDto {
-
+    @NotNull(message = "siteUserId cannot be null")
     private Long siteUserId;
+    @NotNull(message = "paymentTypeId cannot be null")
     private Long paymentTypeId;
+    @NotBlank(message = "provider cannot be blank")
     private String provider;
+    @NotBlank(message = "accountNumber cannot be blank")
     private String accountNumber;
+    @NotNull(message = "expiryDate cannot be null")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Timestamp expiryDate;
-    private Boolean defaultPayment; //todo default false- method to set true
 
     public UserPaymentMethodRequestDto() {
     }
@@ -59,11 +68,4 @@ public class UserPaymentMethodRequestDto {
         this.expiryDate = expiryDate;
     }
 
-    public Boolean getDefaultPayment() {
-        return defaultPayment;
-    }
-
-    public void setDefaultPayment(Boolean defaultPayment) {
-        this.defaultPayment = defaultPayment;
-    }
 }

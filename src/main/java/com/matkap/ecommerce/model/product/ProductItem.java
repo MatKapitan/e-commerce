@@ -9,20 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Product_item")
+@Table(name = "product_item")
 public class ProductItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    private String SKU;
+    @Column(name = "sku")
+    private String sku;
 
     @Column(name = "qty_in_stock")
-    private Long qty_in_stock;
-
-    private String product_image;
-
+    private Long qtyInStock;
+    @Column(name = "product_image")
+    private String productImage;
+    @Column(name = "price")
     private BigDecimal price;
 
     @ManyToOne()
@@ -58,28 +60,28 @@ public class ProductItem {
         this.product = product;
     }
 
-    public String getSKU() {
-        return SKU;
+    public String getSku() {
+        return sku;
     }
 
-    public void setSKU(String SKU) {
-        this.SKU = SKU;
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 
-    public Long getQty_in_stock() {
-        return qty_in_stock;
+    public Long getQtyInStock() {
+        return qtyInStock;
     }
 
-    public void setQty_in_stock(Long qty_in_stock) {
-        this.qty_in_stock = qty_in_stock;
+    public void setQtyInStock(Long qtyInStock) {
+        this.qtyInStock = qtyInStock;
     }
 
-    public String getProduct_image() {
-        return product_image;
+    public String getProductImage() {
+        return productImage;
     }
 
-    public void setProduct_image(String product_image) {
-        this.product_image = product_image;
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 
     public BigDecimal getPrice() {
@@ -97,6 +99,7 @@ public class ProductItem {
     public void setVariationOptions(List<VariationOption> variationOptions) {
         this.variationOptions = variationOptions;
     }
+
 
 
     public void addVariationOption(VariationOption variationOption){

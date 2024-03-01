@@ -7,11 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Variation_option")
+@Table(name = "variation_option")
 public class VariationOption {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "name")
     private Long id;
 
     @ManyToOne

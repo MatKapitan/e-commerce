@@ -9,20 +9,27 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "site_user_id", referencedColumnName = "id")
     private SiteUser siteUser;
-
+    @Column(name = "default_address")
     private Boolean defaultAddress;
-
+    @Column(name = "unit_number")
     private String unitNumber;
+    @Column(name = "street_number")
     private String streetNumber;
+    @Column(name = "address_line_1")
     private String addressLine1;
+    @Column(name = "address_line_2")
     private String addressLine2;
+    @Column(name = "city")
     private String city;
+    @Column(name = "region")
     private String region;
+    @Column(name = "postal_code")
     private String postalCode;
 
     @ManyToOne

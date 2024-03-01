@@ -34,7 +34,9 @@ public class ShoppingCardServiceImpl implements ShoppingCardService {
         shoppingCard.setSiteUser(siteUser);
         ProductItem productItem = productItemService.getProductItem(shoppingCardRequestDto.getProductItemId());
         shoppingCard.setProductItem(productItem);
-        shoppingCard.setQuantity(shoppingCardRequestDto.getQuantity());
+        Long quantity = shoppingCardRequestDto.getQuantity();
+        productItemService.isProductInStock(productItem.getId(), quantity);
+        shoppingCard.setQuantity(quantity);
         return shoppingCardRepository.save(shoppingCard);
     }
 

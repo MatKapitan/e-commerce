@@ -18,4 +18,7 @@ public interface ProductItemService {
     public ProductItemResponseDto addVariationOptionToProductItem(Long product_item_id ,Long variation_option_id);
     public ProductItemResponseDto removeVariationOptionFromProductItem(Long product_item_id , Long variation_option_id);
 
+    public boolean isProductInStock(Long id, Long qty);
+    public void reduceProductInStock(Long id, Long qty);
+
 }

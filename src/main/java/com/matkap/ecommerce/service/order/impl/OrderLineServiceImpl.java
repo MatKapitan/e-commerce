@@ -38,6 +38,7 @@ public class OrderLineServiceImpl implements OrderLineService {
         List<ShoppingCard> shoppingCardsBySiteUser = shoppingCardService.getShoppingCardsBySiteUser(siteUserId);
         BigDecimal totalPrice = BigDecimal.ZERO;
         for (ShoppingCard shoppingcard : shoppingCardsBySiteUser) {
+            Long productItemId = shoppingcard.getProductItem().getId();
             OrderLine orderLine = new OrderLine();
             orderLine.setShopOrder(shopOrder);
             orderLine.setProductItem(shoppingcard.getProductItem());
@@ -47,6 +48,7 @@ public class OrderLineServiceImpl implements OrderLineService {
 
             BigDecimal quantity = new BigDecimal(shoppingcard.getQuantity());
             totalPrice = totalPrice.add(price).multiply(quantity);
+            productItemService.reduceProductInStock(productItemId, quantity.longValue());
             orderLineRepository.save(orderLine);
             shoppingCardService.deleteShoppingCard(shoppingcard.getId());}
         return totalPrice;
@@ -65,10 +67,10 @@ public class OrderLineServiceImpl implements OrderLineService {
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         Double maxDiscount = 1.00d;
         for (Promotion promotion : promotions) {
-            if (promotion.getStart_date().after(currentTime) &&
-                    promotion.getEnd_date().before(currentTime)){
-                if (promotion.getDiscount_rate() > maxDiscount){
-                    maxDiscount = promotion.getDiscount_rate();}
+            if (promotion.getStartDate().after(currentTime) &&
+                    promotion.getEndDate().before(currentTime)){
+                if (promotion.getDiscountRate() > maxDiscount){
+                    maxDiscount = promotion.getDiscountRate();}
             }
         }
         return maxDiscount;

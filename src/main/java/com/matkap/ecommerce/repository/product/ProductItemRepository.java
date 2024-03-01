@@ -7,20 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 public interface ProductItemRepository extends JpaRepository<ProductItem, Long> {
 
     @Query("""
-            select a
+            select (count(a) > 0)
             from ProductItem a
             where a.id = :id
-            and a.qty_in_stock >= :qty
+            and a.qtyInStock >= :qty
             """)
     boolean isProductInStock(Long id, Long qty);
-
-
-
-
-
-
-
-
-
 
 }

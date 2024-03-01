@@ -5,21 +5,23 @@ import com.matkap.ecommerce.model.user.SiteUser;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Shopping_card")
+@Table(name = "shopping_card")
 public class ShoppingCard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
+    @JoinColumn(name = "site_user_id", referencedColumnName = "id")
     private SiteUser siteUser;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
+    @JoinColumn(name = "product_item_id", referencedColumnName = "id")
     private ProductItem productItem;
 
+    @Column(name = "quantity")
     private Long quantity;
 
     public ShoppingCard() {
@@ -56,4 +58,6 @@ public class ShoppingCard {
     public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
+
+
 }

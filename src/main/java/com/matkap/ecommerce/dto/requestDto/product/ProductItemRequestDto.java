@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 public class ProductItemRequestDto {
 
-    @NotBlank(message = "SKU cannot be blank")
+    @NotBlank(message = "sku cannot be blank")
     private String sku;
     @NotNull(message = "quantityInStock cannot be null")
     @Positive(message = "quantityInStock must be positive")

@@ -8,24 +8,27 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "user_payment_method")
 public class UserPaymentMethod {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "site_user_id")
+    @JoinColumn(name = "site_user_id", referencedColumnName = "id")
     private SiteUser siteUser;
-
     @ManyToOne
-    @JoinColumn(name = "payment_type_id")
+    @JoinColumn(name = "payment_type_id", referencedColumnName = "id")
     private PaymentType paymentType;
-
+    @Column(name = "provider")
     private String provider;
+    @Column(name = "account_number")
     private String accountNumber;
+    @Column(name = "expiry_date")
     private Timestamp expiryDate;
+    @Column(name = "default_payment")
     private Boolean defaultPayment;
 
 

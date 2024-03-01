@@ -13,7 +13,7 @@ public class Mapper {
         productResponseDto.setId(product.getId());
         productResponseDto.setName(product.getName());
         productResponseDto.setDescription(product.getDescription());
-        productResponseDto.setProduct_image(product.getProduct_image());
+        productResponseDto.setProduct_image(product.getProductImage());
         productResponseDto.setProductCategory(product.getProductCategory());
         return productResponseDto;
     }
@@ -29,11 +29,11 @@ public class Mapper {
     public static ProductItemResponseDto productItemToProductItemResponseDto(ProductItem productItem){
         ProductItemResponseDto productItemResponseDto = new ProductItemResponseDto();
         productItemResponseDto.setId(productItem.getId());
-        productItemResponseDto.setQty_in_stock(productItem.getQty_in_stock());
+        productItemResponseDto.setQty_in_stock(productItem.getQtyInStock());
         productItemResponseDto.setProduct(productItem.getProduct());
-        productItemResponseDto.setSKU(productItem.getSKU());
+        productItemResponseDto.setSKU(productItem.getSku());
         productItemResponseDto.setPrice(productItem.getPrice());
-        productItemResponseDto.setProduct_image(productItem.getProduct_image());
+        productItemResponseDto.setProduct_image(productItem.getProductImage());
         productItemResponseDto.setVariationOptions(productItem.getVariationOptions());
         return productItemResponseDto;
     }
@@ -49,7 +49,7 @@ public class Mapper {
     public static ProductCategoryResponseDto productCategoryToProductCategoryResponseDto(ProductCategory productCategory){
         ProductCategoryResponseDto productCategoryResponseDto = new ProductCategoryResponseDto();
         productCategoryResponseDto.setProduct_category_id(productCategory.getId());
-        productCategoryResponseDto.setCategory_name(productCategory.getCategory_name());
+        productCategoryResponseDto.setCategory_name(productCategory.getCategoryName());
         productCategoryResponseDto.setParent_category(productCategory.getParent_category());
         productCategoryResponseDto.setChild_category(productCategory.getChildren_category());
         return productCategoryResponseDto;

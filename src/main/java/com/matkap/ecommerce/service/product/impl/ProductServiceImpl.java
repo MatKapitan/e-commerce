@@ -31,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = new Product();
         product.setName(productRequestDto.getName());
         product.setDescription(productRequestDto.getDescription());
-        product.setProduct_image(productRequestDto.getProductImage());
+        product.setProductImage(productRequestDto.getProductImage());
         if (productRequestDto.getProductCategoryId() == null){
             throw new IllegalArgumentException("Product has to have a category");
         }
@@ -70,7 +70,7 @@ public class ProductServiceImpl implements ProductService {
         Product productToEdit = getProduct(productId);
         productToEdit.setName(productRequestDto.getName());
         productToEdit.setDescription(productRequestDto.getDescription());
-        productToEdit.setProduct_image(productRequestDto.getProductImage());
+        productToEdit.setProductImage(productRequestDto.getProductImage());
         if (productRequestDto.getProductCategoryId() == null){
             throw new IllegalArgumentException("Product has to have a category");
         }

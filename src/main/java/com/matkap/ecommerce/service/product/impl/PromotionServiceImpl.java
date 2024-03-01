@@ -29,9 +29,9 @@ public class PromotionServiceImpl implements PromotionService {
         Promotion promotion = new Promotion();
         promotion.setName(promotionRequestDto.getName());
         promotion.setDescription(promotionRequestDto.getDescription());
-        promotion.setDiscount_rate(promotionRequestDto.getDiscountRate());
-        promotion.setStart_date(promotionRequestDto.getStartDate());
-        promotion.setEnd_date(promotionRequestDto.getEndDate());
+        promotion.setDiscountRate(promotionRequestDto.getDiscountRate());
+        promotion.setStartDate(promotionRequestDto.getStartDate());
+        promotion.setEndDate(promotionRequestDto.getEndDate());
 
         return promotionRepository.save(promotion);
     }
@@ -64,9 +64,9 @@ public class PromotionServiceImpl implements PromotionService {
         Promotion promotion = getPromotionOrThrow(promotionId);
         promotion.setName(promotionRequestDto.getName());
         promotion.setDescription(promotionRequestDto.getDescription());
-        promotion.setDiscount_rate(promotionRequestDto.getDiscountRate());
-        promotion.setStart_date(promotionRequestDto.getStartDate());
-        promotion.setEnd_date(promotionRequestDto.getEndDate());
+        promotion.setDiscountRate(promotionRequestDto.getDiscountRate());
+        promotion.setStartDate(promotionRequestDto.getStartDate());
+        promotion.setEndDate(promotionRequestDto.getEndDate());
 
         promotionRepository.save(promotion);
         return promotion;

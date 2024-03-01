@@ -7,25 +7,24 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Product")
+@Table(name = "product")
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-
+    @Column(name = "name")
     private String name;
-
+    @Column(name = "description")
     private String description;
-
-    private String product_image;
-
+    @Column(name = "product_image")
+    private String productImage;
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "product_category_id", referencedColumnName = "id")
     private ProductCategory productCategory;
-
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "product", cascade = CascadeType.ALL)
     @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductItem> productItems;
 
     public Long getId() {
@@ -52,12 +51,12 @@ public class Product {
         this.description = description;
     }
 
-    public String getProduct_image() {
-        return product_image;
+    public String getProductImage() {
+        return productImage;
     }
 
-    public void setProduct_image(String product_image) {
-        this.product_image = product_image;
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 
     public ProductCategory getProductCategory() {

@@ -10,12 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Product_category")
+@Table(name = "product_category")
 public class ProductCategory {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
@@ -23,13 +24,12 @@ public class ProductCategory {
     @JsonBackReference
     private ProductCategory parent_category;
 
-    @OneToMany(mappedBy = "parent_category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
+    @OneToMany(mappedBy = "parent_category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private  List<ProductCategory> children_category = new ArrayList<>();
-
-// TODO Data Integrity Violation: we cannot process your request.
-    private String category_name;
+    @Column(name = "category_name")
+    private String categoryName;
 
     @ManyToMany(mappedBy = "productCategory")
     private List<Promotion> promotions = new ArrayList<>();
@@ -64,12 +64,12 @@ public class ProductCategory {
         this.children_category = children_category;
     }
 
-    public String getCategory_name() {
-        return category_name;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategory_name(String category_name) {
-        this.category_name = category_name;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public List<Promotion> getPromotions() {

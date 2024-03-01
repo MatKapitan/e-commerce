@@ -3,24 +3,19 @@ package com.matkap.ecommerce.model.product;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Variation")
+@Table(name = "variation")
 public class Variation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private ProductCategory productCategory;
-
+    @Column(name = "name")
     private String name;
-
-//    @OneToMany(mappedBy = "variation")
-//    private List<VariationOption> variationOptions = new ArrayList<>();
-
-    //TODO Bidirectional bad
-
 
     public Variation() {
     }
@@ -49,11 +44,4 @@ public class Variation {
         this.name = name;
     }
 
-//    public List<VariationOption> getVariationOptions() {
-//        return variationOptions;
-//    }
-//
-//    public void setVariationOptions(List<VariationOption> variationOptions) {
-//        this.variationOptions = variationOptions;
-//    }
 }

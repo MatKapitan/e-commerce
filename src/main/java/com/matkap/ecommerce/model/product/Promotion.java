@@ -9,20 +9,25 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
-@Table(name = "Promotion")
+@Table(name = "promotion")
 public class Promotion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-
+    @Column(name = "name")
     private String name;
+    @Column(name = "description")
     private String description;
-    private Double discount_rate;
+    @Column(name = "discount_rate")
+    private Double discountRate;
     @JsonFormat(pattern="yyyy-MM-dd")
-    private Timestamp start_date;
+    @Column(name = "start_date")
+    private Timestamp startDate;
     @JsonFormat(pattern="yyyy-MM-dd")
-    private Timestamp end_date;
+    @Column(name = "end_date")
+    private Timestamp endDate;
 
     @JsonIgnore
     @ManyToMany
@@ -61,28 +66,28 @@ public class Promotion {
         this.description = description;
     }
 
-    public Double getDiscount_rate() {
-        return discount_rate;
+    public Double getDiscountRate() {
+        return discountRate;
     }
 
-    public void setDiscount_rate(Double discount_rate) {
-        this.discount_rate = discount_rate;
+    public void setDiscountRate(Double discountRate) {
+        this.discountRate = discountRate;
     }
 
-    public Timestamp getStart_date() {
-        return start_date;
+    public Timestamp getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(Timestamp start_date) {
-        this.start_date = start_date;
+    public void setStartDate(Timestamp startDate) {
+        this.startDate = startDate;
     }
 
-    public Timestamp getEnd_date() {
-        return end_date;
+    public Timestamp getEndDate() {
+        return endDate;
     }
 
-    public void setEnd_date(Timestamp end_date) {
-        this.end_date = end_date;
+    public void setEndDate(Timestamp endDate) {
+        this.endDate = endDate;
     }
 
     public List<ProductCategory> getProductCategory() {

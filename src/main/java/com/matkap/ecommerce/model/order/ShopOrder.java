@@ -8,7 +8,6 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.List;
 
 @Entity
@@ -16,11 +15,13 @@ public class ShopOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     @ManyToOne
     @JoinColumn(name = "site_user_id")
     private SiteUser siteUser;
-    private Timestamp order_date;
+    @Column(name = "order_date")
+    private Timestamp orderDate;
     @ManyToOne
     @JoinColumn(name = "user_payment_method_id")
     private UserPaymentMethod userPaymentMethod;
@@ -30,6 +31,7 @@ public class ShopOrder {
     @ManyToOne
     @JoinColumn(name = "shipping_method_id")
     private ShippingMethod shippingMethod;
+    @Column(name = "order_total")
     private BigDecimal orderTotal;
     @ManyToOne
     @JoinColumn(name = "order_status_id")
@@ -60,12 +62,12 @@ public class ShopOrder {
         this.siteUser = siteUser;
     }
 
-    public Timestamp getOrder_date() {
-        return order_date;
+    public Timestamp getOrderDate() {
+        return orderDate;
     }
 
-    public void setOrder_date(Timestamp order_date) {
-        this.order_date = order_date;
+    public void setOrderDate(Timestamp orderDate) {
+        this.orderDate = orderDate;
     }
 
     public UserPaymentMethod getUserPaymentMethod() {

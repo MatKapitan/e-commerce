@@ -25,7 +25,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     @Override
     public ProductCategoryResponseDto createProductCategory(ProductCategoryRequestDto productCategoryRequestDto) {
         ProductCategory productCategory  = new ProductCategory();
-        productCategory.setCategory_name(productCategoryRequestDto.getCategoryName());
+        productCategory.setCategoryName(productCategoryRequestDto.getCategoryName());
         if (productCategoryRequestDto.getParentCategoryId() != null) {
             productCategory.setParent_category(getProductCategory(productCategoryRequestDto.getParentCategoryId()));
         }
@@ -61,7 +61,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     @Override
     public ProductCategoryResponseDto editProductCategory(Long productCategoryId, ProductCategoryRequestDto productCategoryRequestDto) {
         ProductCategory productCategory = getProductCategory(productCategoryId);
-        productCategory.setCategory_name(productCategoryRequestDto.getCategoryName());
+        productCategory.setCategoryName(productCategoryRequestDto.getCategoryName());
         if(productCategoryRequestDto.getParentCategoryId() != null){
             productCategory.setParent_category(getProductCategory(productCategoryRequestDto.getParentCategoryId()));
         }

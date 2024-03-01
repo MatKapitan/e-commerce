@@ -4,6 +4,7 @@ import com.matkap.ecommerce.dto.Mapper;
 import com.matkap.ecommerce.dto.requestDto.product.ProductItemRequestDto;
 import com.matkap.ecommerce.dto.responseDto.product.ProductItemResponseDto;
 import com.matkap.ecommerce.exception.EntityNotFoundException;
+import com.matkap.ecommerce.exception.ProductNotInStockException;
 import com.matkap.ecommerce.model.product.Product;
 import com.matkap.ecommerce.model.product.ProductItem;
 import com.matkap.ecommerce.model.product.VariationOption;
@@ -36,9 +37,9 @@ public class ProductItemServiceImpl implements ProductItemService {
     public ProductItemResponseDto createProductItem(ProductItemRequestDto productItemRequestDto) {
 
         ProductItem productItem = new ProductItem();
-        productItem.setSKU(productItemRequestDto.getSku());
-        productItem.setQty_in_stock(productItemRequestDto.getQuantityInStock());
-        productItem.setProduct_image(productItemRequestDto.getProductImage());
+        productItem.setSku(productItemRequestDto.getSku());
+        productItem.setQtyInStock(productItemRequestDto.getQuantityInStock());
+        productItem.setProductImage(productItemRequestDto.getProductImage());
         productItem.setPrice(productItemRequestDto.getPrice());
 
         if(productItemRequestDto.getProductId() == null){
@@ -78,9 +79,9 @@ public class ProductItemServiceImpl implements ProductItemService {
     @Override
     public ProductItemResponseDto editProductItem(Long productItemId, ProductItemRequestDto productItemRequestDto) {
         ProductItem productItemToEdit = getProductItem(productItemId);
-        productItemToEdit.setSKU(productItemRequestDto.getSku());
-        productItemToEdit.setQty_in_stock(productItemRequestDto.getQuantityInStock());
-        productItemToEdit.setProduct_image(productItemRequestDto.getProductImage());
+        productItemToEdit.setSku(productItemRequestDto.getSku());
+        productItemToEdit.setQtyInStock(productItemRequestDto.getQuantityInStock());
+        productItemToEdit.setProductImage(productItemRequestDto.getProductImage());
         productItemToEdit.setPrice(productItemRequestDto.getPrice());
 
         if(productItemRequestDto.getProductId() == null){
@@ -112,5 +113,23 @@ public class ProductItemServiceImpl implements ProductItemService {
         productItemRepository.save(productItem);
 
         return Mapper.productItemToProductItemResponseDto(productItem);
+    }
+
+    @Override
+    public boolean isProductInStock(Long id, Long qty) {
+         if (!productItemRepository.isProductInStock(id, qty)){
+             throw new ProductNotInStockException(id);
+         }
+         return true;
+    }
+
+    @Override
+    public void reduceProductInStock(Long id, Long qty) {
+        isProductInStock(id, qty);
+        ProductItem productItem = getProductItem(id);
+        Long newQtyInStock = productItem.getQtyInStock() - qty;
+        productItem.setQtyInStock(newQtyInStock);
+        productItemRepository.save(productItem);
+
     }
 }

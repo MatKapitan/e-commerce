@@ -23,8 +23,9 @@ public class OrderLine {
     @ManyToOne
     @JoinColumn(name = "shop_order_id")
     private ShopOrder shopOrder;
-
+    @Column(name = "quantity")
     private Long quantity;
+    @Column(name = "price")
     private BigDecimal price;
 
     public OrderLine() {

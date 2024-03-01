@@ -3,7 +3,6 @@ package com.matkap.ecommerce.service.order.impl;
 
 import com.matkap.ecommerce.dto.requestDto.order.ShopOrderRequestDto;
 import com.matkap.ecommerce.exception.EntityNotFoundException;
-import com.matkap.ecommerce.model.order.OrderLine;
 import com.matkap.ecommerce.model.order.ShippingMethod;
 import com.matkap.ecommerce.model.order.ShopOrder;
 import com.matkap.ecommerce.repository.order.OrderStatusRepository;
@@ -49,7 +48,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     public ShopOrder createShopOrder(ShopOrderRequestDto shopOrderRequestDto) {
         //create order
         ShopOrder shopOrder = new ShopOrder();
-        shopOrder.setOrder_date(new Timestamp(System.currentTimeMillis()));
+        shopOrder.setOrderDate(new Timestamp(System.currentTimeMillis()));
         shopOrder.setOrderStatus(orderStatusRepository.findByStatus("Ordered"));
         Long siteUserId = shopOrderRequestDto.getSiteUserId();
         shopOrder.setSiteUser(siteUserService.getSiteUser(siteUserId));
@@ -107,7 +106,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     @Override
     public ShopOrder editShopOrder(Long shopOrderId, ShopOrderRequestDto shopOrderRequestDto) {
         ShopOrder shopOrder = getShopOrder(shopOrderId);
-        shopOrder.setOrder_date(new Timestamp(System.currentTimeMillis()));
+        shopOrder.setOrderDate(new Timestamp(System.currentTimeMillis()));
         shopOrder.setOrderStatus(orderStatusRepository.findByStatus("Drafted"));
         shopOrder.setSiteUser(siteUserService.getSiteUser(shopOrderRequestDto.getSiteUserId()));
         shopOrder.setAddress(addressService.getAddress(shopOrderRequestDto.getAddressId()));

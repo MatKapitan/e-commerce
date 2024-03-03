@@ -31,9 +31,9 @@ public class AddressController {
         return new ResponseEntity<>(address, HttpStatus.OK);
     }
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<Address> getAddressById(@PathVariable Long id){
-        Address address = addressService.getAddressById(id);
+    @GetMapping("/get/{AddressId}")
+    public ResponseEntity<Address> getAddressById(@PathVariable Long AddressId){
+        Address address = addressService.getAddressById(AddressId);
         return new ResponseEntity<>(address, HttpStatus.OK);
     }
 
@@ -48,16 +48,16 @@ public class AddressController {
         return new ResponseEntity<>(countries, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteAddress(@PathVariable Long id){
-        addressService.deleteAddress(id);
+    @DeleteMapping("/delete/{AddressId}")
+    public ResponseEntity<Void> deleteAddress(@PathVariable Long AddressId){
+        addressService.deleteAddress(AddressId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<Address> editAddress(@PathVariable Long id,
+    @PutMapping("/edit/{AddressId}")
+    public ResponseEntity<Address> editAddress(@PathVariable Long AddressId,
                                                @Valid @RequestBody AddressRequestDto addressRequestDto){
-        Address address = addressService.editAddress(id, addressRequestDto);
+        Address address = addressService.editAddress(AddressId, addressRequestDto);
         return new ResponseEntity<>(address, HttpStatus.OK);
     }
 }

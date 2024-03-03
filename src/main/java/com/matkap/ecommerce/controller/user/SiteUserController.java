@@ -27,9 +27,9 @@ public class SiteUserController {
         return new ResponseEntity<>(siteUser, HttpStatus.OK);
     }
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<SiteUser> getSiteUserById(@PathVariable Long id){
-        SiteUser siteUser = siteUserService.getSiteUserById(id);
+    @GetMapping("/get/{siteUserId}")
+    public ResponseEntity<SiteUser> getSiteUserById(@PathVariable Long siteUserId){
+        SiteUser siteUser = siteUserService.getSiteUserById(siteUserId);
         return new ResponseEntity<>(siteUser, HttpStatus.OK);
     }
 
@@ -39,16 +39,16 @@ public class SiteUserController {
         return new ResponseEntity<>(siteUsers, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteSiteUser(@PathVariable Long id){
-        siteUserService.deleteSiteUser(id);
+    @DeleteMapping("/delete/{siteUserId}")
+    public ResponseEntity<Void> deleteSiteUser(@PathVariable Long siteUserId){
+        siteUserService.deleteSiteUser(siteUserId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<SiteUser> editSiteUser(@PathVariable Long id,
+    @PutMapping("/edit/{siteUserId}")
+    public ResponseEntity<SiteUser> editSiteUser(@PathVariable Long siteUserId,
                                                  @Valid @RequestBody SiteUserRequestDto siteUserRequestDto){
-        SiteUser siteUser = siteUserService.editSiteUser(id, siteUserRequestDto);
+        SiteUser siteUser = siteUserService.editSiteUser(siteUserId, siteUserRequestDto);
         return new ResponseEntity<>(siteUser, HttpStatus.OK);
     }
 }

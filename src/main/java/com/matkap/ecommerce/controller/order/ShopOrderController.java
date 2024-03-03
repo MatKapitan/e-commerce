@@ -21,7 +21,7 @@ public class ShopOrderController {
         this.shopOrderService = shopOrderService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<ShopOrder> createShopOrder(@Valid @RequestBody ShopOrderRequestDto shopOrderRequestDto){
         ShopOrder shopOrder = shopOrderService.createShopOrder(shopOrderRequestDto);
         return new ResponseEntity<>(shopOrder, HttpStatus.OK);

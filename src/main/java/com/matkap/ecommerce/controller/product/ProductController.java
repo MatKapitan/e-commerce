@@ -24,15 +24,15 @@ public class ProductController {
 
 
 
-    @PostMapping("/add")
+    @PostMapping("/create")
     public ResponseEntity<ProductResponseDto> addProduct(@Valid @RequestBody ProductRequestDto productRequestDto){
         ProductResponseDto productResponseDto = productService.createProduct(productRequestDto);
         return new ResponseEntity<>(productResponseDto, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ProductResponseDto> getProductById(@PathVariable Long id){
-        ProductResponseDto productResponseDto = productService.getProductById(id);
+    @GetMapping("/{productId}")
+    public ResponseEntity<ProductResponseDto> getProductById(@PathVariable Long productId){
+        ProductResponseDto productResponseDto = productService.getProductById(productId);
         return new ResponseEntity<>(productResponseDto, HttpStatus.OK);
     }
 
@@ -42,16 +42,16 @@ public class ProductController {
         return  new ResponseEntity<>(productResponseDtos, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long id){
-        productService.deleteProduct(id);
+    @DeleteMapping("/delete/{productId}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long productId){
+        productService.deleteProduct(productId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<ProductResponseDto> editProduct(@PathVariable Long id,
+    @PutMapping("/edit/{productId}")
+    public ResponseEntity<ProductResponseDto> editProduct(@PathVariable Long productId,
                                                           @Valid @RequestBody ProductRequestDto productRequestDto){
-        ProductResponseDto productResponseDto = productService.editProduct(id, productRequestDto);
+        ProductResponseDto productResponseDto = productService.editProduct(productId, productRequestDto);
         return new ResponseEntity<>(productResponseDto, HttpStatus.OK);
     }
 

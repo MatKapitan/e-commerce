@@ -21,15 +21,15 @@ public class ProductCategoryController {
         this.productCategoryService = productCategoryService;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/create")
     public ResponseEntity<ProductCategoryResponseDto> addProductCategory(@Valid @RequestBody ProductCategoryRequestDto productCategoryRequestDto){
         ProductCategoryResponseDto productCategoryResponseDto = productCategoryService.createProductCategory(productCategoryRequestDto);
         return new ResponseEntity<>(productCategoryResponseDto, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public  ResponseEntity<ProductCategoryResponseDto> getProductCategoryById(@PathVariable Long id){
-        ProductCategoryResponseDto productCategoryById = productCategoryService.getProductCategoryById(id);
+    @GetMapping("/{productCategoryId}")
+    public  ResponseEntity<ProductCategoryResponseDto> getProductCategoryById(@PathVariable Long productCategoryId){
+        ProductCategoryResponseDto productCategoryById = productCategoryService.getProductCategoryById(productCategoryId);
         return new ResponseEntity<>(productCategoryById, HttpStatus.OK);
     }
 
@@ -39,16 +39,16 @@ public class ProductCategoryController {
         return new ResponseEntity<>(productCategoryResponseDtos, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteProductCategory(@PathVariable Long id){
-        productCategoryService.deleteProductCategory(id);
+    @DeleteMapping("/delete/{productCategoryId}")
+    public ResponseEntity<Void> deleteProductCategory(@PathVariable Long productCategoryId){
+        productCategoryService.deleteProductCategory(productCategoryId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<ProductCategoryResponseDto> editProductCategory(@PathVariable Long product_category_id,
+    @PutMapping("/edit/{productCategoryId}")
+    public ResponseEntity<ProductCategoryResponseDto> editProductCategory(@PathVariable Long productCategoryId,
                                                                           @Valid @RequestBody ProductCategoryRequestDto productCategoryRequestDto){
-        ProductCategoryResponseDto productCategoryResponseDto = productCategoryService.editProductCategory(product_category_id, productCategoryRequestDto);
+        ProductCategoryResponseDto productCategoryResponseDto = productCategoryService.editProductCategory(productCategoryId, productCategoryRequestDto);
         return new ResponseEntity<>(productCategoryResponseDto, HttpStatus.OK);
     }
 

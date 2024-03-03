@@ -30,9 +30,9 @@ public class PromotionController {
         return new ResponseEntity<>(promotion, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Promotion> getPromotionById(@PathVariable Long id){
-        Promotion promotion = promotionService.getPromotionById(id);
+    @GetMapping("/{promotionId}")
+    public ResponseEntity<Promotion> getPromotionById(@PathVariable Long promotionId){
+        Promotion promotion = promotionService.getPromotionById(promotionId);
         return new ResponseEntity<>(promotion, HttpStatus.OK);
 
     }
@@ -43,16 +43,16 @@ public class PromotionController {
         return new ResponseEntity<>(promotions, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deletePromotion(@PathVariable Long id){
-        promotionService.deletePromotion(id);
+    @DeleteMapping("/delete/{promotionId}")
+    public ResponseEntity<Void> deletePromotion(@PathVariable Long promotionId){
+        promotionService.deletePromotion(promotionId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<Promotion> updatePromotion(@PathVariable Long id,
+    @PutMapping("/edit/{promotionId}")
+    public ResponseEntity<Promotion> updatePromotion(@PathVariable Long promotionId,
                                                      @Valid @RequestBody PromotionRequestDto promotionRequestDto){
-        Promotion promotion = promotionService.updatePromotion(promotionRequestDto, id);
+        Promotion promotion = promotionService.updatePromotion(promotionRequestDto, promotionId);
         return new ResponseEntity<>(promotion, HttpStatus.OK);
     }
 

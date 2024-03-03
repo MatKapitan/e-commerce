@@ -22,15 +22,15 @@ public class PaymentController {
         this.userPaymentMethodService = userPaymentMethodService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<UserPaymentMethod> createUserPaymentMethod(@Valid @RequestBody UserPaymentMethodRequestDto userPaymentMethodRequestDto){
         UserPaymentMethod userPaymentMethod = userPaymentMethodService.createUserPaymentMethod(userPaymentMethodRequestDto);
         return new ResponseEntity<>(userPaymentMethod, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UserPaymentMethod> getUserPaymentMethodById(@PathVariable Long id){
-        UserPaymentMethod userPaymentMethod = userPaymentMethodService.getUserPaymentMethodById(id);
+    @GetMapping("/{paymentId}")
+    public ResponseEntity<UserPaymentMethod> getUserPaymentMethodById(@PathVariable Long paymentId){
+        UserPaymentMethod userPaymentMethod = userPaymentMethodService.getUserPaymentMethodById(paymentId);
         return new ResponseEntity<>(userPaymentMethod, HttpStatus.OK);
     }
 
@@ -46,16 +46,16 @@ public class PaymentController {
         return new ResponseEntity<>(paymentTypes, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteUserPaymentMethod(@PathVariable Long id){
-        userPaymentMethodService.deleteUserPaymentMethod(id);
+    @DeleteMapping("/delete/{paymentId}")
+    public ResponseEntity<Void> deleteUserPaymentMethod(@PathVariable Long paymentId){
+        userPaymentMethodService.deleteUserPaymentMethod(paymentId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<UserPaymentMethod> editUserPaymentMethod(@PathVariable Long id,
+    @PutMapping("/edit/{paymentId}")
+    public ResponseEntity<UserPaymentMethod> editUserPaymentMethod(@PathVariable Long paymentId,
                                                                    @Valid @RequestBody UserPaymentMethodRequestDto userPaymentMethodRequestDto){
-        UserPaymentMethod userPaymentMethod = userPaymentMethodService.editUserPaymentMethod(id, userPaymentMethodRequestDto);
+        UserPaymentMethod userPaymentMethod = userPaymentMethodService.editUserPaymentMethod(paymentId, userPaymentMethodRequestDto);
         return new ResponseEntity<>(userPaymentMethod, HttpStatus.OK);
     }
 

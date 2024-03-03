@@ -23,15 +23,15 @@ public class ProductItemController {
     }
 
 
-    @PostMapping("/add")
+    @PostMapping("/create")
     public ResponseEntity<ProductItemResponseDto> addProductItem(@Valid @RequestBody ProductItemRequestDto productItemRequestDto){
         ProductItemResponseDto productItemResponseDto = productItemService.createProductItem(productItemRequestDto);
         return new ResponseEntity<>(productItemResponseDto, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public  ResponseEntity<ProductItemResponseDto> getProductItemById(@PathVariable Long id){
-        ProductItemResponseDto productItemResponseDto = productItemService.getProductItemById(id);
+    @GetMapping("/{productItemId}")
+    public  ResponseEntity<ProductItemResponseDto> getProductItemById(@PathVariable Long productItemId){
+        ProductItemResponseDto productItemResponseDto = productItemService.getProductItemById(productItemId);
         return new ResponseEntity<>(productItemResponseDto, HttpStatus.OK);
     }
 
@@ -41,30 +41,30 @@ public class ProductItemController {
         return new ResponseEntity<>(productItems, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public  ResponseEntity<Void> deleteProductItem(@PathVariable Long id){
-        productItemService.deleteProductItem(id);
+    @DeleteMapping("/delete/{productItemId}")
+    public  ResponseEntity<Void> deleteProductItem(@PathVariable Long productItemId){
+        productItemService.deleteProductItem(productItemId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<ProductItemResponseDto> editProductItem(@PathVariable Long id,
+    @PutMapping("/edit/{productItemId}")
+    public ResponseEntity<ProductItemResponseDto> editProductItem(@PathVariable Long productItemId,
                                                                   @Valid @RequestBody ProductItemRequestDto productItemRequestDto){
-        ProductItemResponseDto productItemResponseDto = productItemService.editProductItem(id, productItemRequestDto);
+        ProductItemResponseDto productItemResponseDto = productItemService.editProductItem(productItemId, productItemRequestDto);
         return new ResponseEntity<>(productItemResponseDto, HttpStatus.OK);
     }
 
-    @PutMapping("/{product_item_id}/variation-option/{variation_option_id}")
-    public ResponseEntity<ProductItemResponseDto> addVariationOptionToProductItem(@PathVariable Long product_item_id,
-                                                                       @PathVariable Long variation_option_id){
-        ProductItemResponseDto productItemResponseDto = productItemService.addVariationOptionToProductItem(product_item_id, variation_option_id);
+    @PutMapping("/{productItemId}/variation-option/{variationOptionId}")
+    public ResponseEntity<ProductItemResponseDto> addVariationOptionToProductItem(@PathVariable Long productItemId,
+                                                                       @PathVariable Long variationOptionId){
+        ProductItemResponseDto productItemResponseDto = productItemService.addVariationOptionToProductItem(productItemId, variationOptionId);
         return new ResponseEntity<>(productItemResponseDto, HttpStatus.OK);
     }
 
-    @PutMapping("/remove/{product_item_id}/variation-option/{variation_option_id}")
-    public ResponseEntity<ProductItemResponseDto> deleteVariationOptionToProductItem(@PathVariable Long product_item_id,
-                                                                                  @PathVariable Long variation_option_id){
-        ProductItemResponseDto productItemResponseDto = productItemService.removeVariationOptionFromProductItem(product_item_id, variation_option_id);
+    @PutMapping("/remove/{productItemId}/variation-option/{variationOptionId}")
+    public ResponseEntity<ProductItemResponseDto> deleteVariationOptionToProductItem(@PathVariable Long productItemId,
+                                                                                  @PathVariable Long variationOptionId){
+        ProductItemResponseDto productItemResponseDto = productItemService.removeVariationOptionFromProductItem(productItemId, variationOptionId);
         return new ResponseEntity<>(productItemResponseDto, HttpStatus.OK);
     }
 

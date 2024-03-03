@@ -22,9 +22,15 @@ public class VariationController {
     }
 
 
-    @GetMapping("/{id}")
-    public ResponseEntity<VariationResponseDto> getVariationById(@Valid @PathVariable Long id){
-        VariationResponseDto variationResponseDto = variationService.getVariationById(id);
+    @PostMapping("/create")
+    public ResponseEntity<VariationResponseDto> addVariation(@Valid @RequestBody VariationRequestDto variationRequestDto){
+        VariationResponseDto variationResponseDto = variationService.createVariation(variationRequestDto);
+        return new ResponseEntity<>(variationResponseDto, HttpStatus.OK);
+    }
+
+    @GetMapping("/{variationId}")
+    public ResponseEntity<VariationResponseDto> getVariationById(@Valid @PathVariable Long variationId){
+        VariationResponseDto variationResponseDto = variationService.getVariationById(variationId);
         return new ResponseEntity<>(variationResponseDto, HttpStatus.OK);
     }
 
@@ -34,22 +40,16 @@ public class VariationController {
         return new ResponseEntity<>(variationResponseDtos, HttpStatus.OK);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<VariationResponseDto> addVariation(@Valid @RequestBody VariationRequestDto variationRequestDto){
-        VariationResponseDto variationResponseDto = variationService.createVariation(variationRequestDto);
-        return new ResponseEntity<>(variationResponseDto, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteVariation(@PathVariable Long id){
-        variationService.deleteVariation(id);
+    @DeleteMapping("/delete/{variationId}")
+    public ResponseEntity<Void> deleteVariation(@PathVariable Long variationId){
+        variationService.deleteVariation(variationId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<VariationResponseDto> editVariation(@PathVariable Long id,
+    @PutMapping("/edit/{variationId}")
+    public ResponseEntity<VariationResponseDto> editVariation(@PathVariable Long variationId,
                                                               @Valid @RequestBody VariationRequestDto variationRequestDto){
-        VariationResponseDto variationResponseDto = variationService.editVariation(id, variationRequestDto);
+        VariationResponseDto variationResponseDto = variationService.editVariation(variationId, variationRequestDto);
         return new ResponseEntity<>(variationResponseDto, HttpStatus.OK);
     }
 }

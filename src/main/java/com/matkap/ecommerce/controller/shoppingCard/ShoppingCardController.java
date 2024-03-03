@@ -26,9 +26,9 @@ public class ShoppingCardController {
         return new ResponseEntity<>(shoppingCard, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ShoppingCard> getShoppingCardById(@PathVariable Long id){
-        ShoppingCard shoppingCard = shoppingCardService.getShoppingCardById(id);
+    @GetMapping("/{shoppingCardId}")
+    public ResponseEntity<ShoppingCard> getShoppingCardById(@PathVariable Long shoppingCardId){
+        ShoppingCard shoppingCard = shoppingCardService.getShoppingCardById(shoppingCardId);
         return new ResponseEntity<>(shoppingCard, HttpStatus.OK);
     }
     @GetMapping("/all")
@@ -37,16 +37,16 @@ public class ShoppingCardController {
         return new ResponseEntity<>(shoppingCards, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteShoppingCard(@PathVariable Long id){
-        shoppingCardService.deleteShoppingCard(id);
+    @DeleteMapping("/delete/{shoppingCardId}")
+    public ResponseEntity<Void> deleteShoppingCard(@PathVariable Long shoppingCardId){
+        shoppingCardService.deleteShoppingCard(shoppingCardId);
         return new  ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<ShoppingCard> editShoppingCard(@PathVariable Long id,
+    @PutMapping("/edit/{shoppingCardId}")
+    public ResponseEntity<ShoppingCard> editShoppingCard(@PathVariable Long shoppingCardId,
                                                          @Valid @RequestBody ShoppingCardRequestDto shoppingCardRequestDto){
-        ShoppingCard shoppingCard = shoppingCardService.editShoppingCard(id, shoppingCardRequestDto);
+        ShoppingCard shoppingCard = shoppingCardService.editShoppingCard(shoppingCardId, shoppingCardRequestDto);
         return new ResponseEntity<>(shoppingCard, HttpStatus.OK);
     }
 

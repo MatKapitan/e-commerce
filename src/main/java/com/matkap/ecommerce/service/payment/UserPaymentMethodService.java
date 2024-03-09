@@ -16,4 +16,5 @@ public interface UserPaymentMethodService {
     public PaymentType getPaymentType(Long paymentTypeId);
     public void deleteUserPaymentMethod(Long userPaymentMethodId);
     public UserPaymentMethod editUserPaymentMethod(Long userPaymentMethodId, UserPaymentMethodRequestDto userPaymentMethodRequestDto);
+    public void  setDefaultPayment(Long userPaymentMethodId);
 }

@@ -3,6 +3,7 @@ package com.matkap.ecommerce.controller.user;
 
 import com.matkap.ecommerce.dto.requestDto.user.SiteUserRequestDto;
 import com.matkap.ecommerce.model.user.SiteUser;
+import com.matkap.ecommerce.repository.user.projections.SiteUserAddresses;
 import com.matkap.ecommerce.service.user.SiteUserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,12 @@ public class SiteUserController {
     public ResponseEntity<SiteUser> getSiteUserById(@PathVariable Long siteUserId){
         SiteUser siteUser = siteUserService.getSiteUserById(siteUserId);
         return new ResponseEntity<>(siteUser, HttpStatus.OK);
+    }
+
+    @GetMapping("/get/{siteUserId}/addresses")
+    public ResponseEntity<SiteUserAddresses> getAllAddressesBySiteUser(@PathVariable Long siteUserId){
+        SiteUserAddresses allAddressesByUser = siteUserService.getAllAddressesByUser(siteUserId);
+        return new ResponseEntity<>(allAddressesByUser, HttpStatus.OK);
     }
 
     @GetMapping("/all")

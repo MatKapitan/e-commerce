@@ -3,8 +3,10 @@ package com.matkap.ecommerce.service.order.impl;
 
 import com.matkap.ecommerce.dto.requestDto.order.ShopOrderRequestDto;
 import com.matkap.ecommerce.exception.EntityNotFoundException;
+import com.matkap.ecommerce.mail.MailService;
 import com.matkap.ecommerce.model.order.ShippingMethod;
 import com.matkap.ecommerce.model.order.ShopOrder;
+import com.matkap.ecommerce.model.user.SiteUser;
 import com.matkap.ecommerce.repository.order.OrderStatusRepository;
 import com.matkap.ecommerce.repository.order.ShippingMethodRepository;
 import com.matkap.ecommerce.repository.order.ShopOrderRepository;
@@ -31,9 +33,11 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     private final UserPaymentMethodService userPaymentMethodService;
     private final OrderLineService orderLineService;
 
+    private final MailService mailService;
 
 
-    public ShopOrderServiceImpl(ShopOrderRepository shopOrderRepository, OrderStatusRepository orderStatusRepository, AddressService addressService, ShippingMethodRepository shippingMethodRepository, SiteUserService siteUserService, UserPaymentMethodService userPaymentMethodService, OrderLineService orderLineService) {
+
+    public ShopOrderServiceImpl(ShopOrderRepository shopOrderRepository, OrderStatusRepository orderStatusRepository, AddressService addressService, ShippingMethodRepository shippingMethodRepository, SiteUserService siteUserService, UserPaymentMethodService userPaymentMethodService, OrderLineService orderLineService, MailService mailService) {
         this.shopOrderRepository = shopOrderRepository;
         this.orderStatusRepository = orderStatusRepository;
         this.addressService = addressService;
@@ -41,6 +45,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
         this.siteUserService = siteUserService;
         this.userPaymentMethodService = userPaymentMethodService;
         this.orderLineService = orderLineService;
+        this.mailService = mailService;
     }
 
     @Transactional
@@ -49,31 +54,30 @@ public class ShopOrderServiceImpl implements ShopOrderService {
         //create order
         ShopOrder shopOrder = new ShopOrder();
         shopOrder.setOrderDate(new Timestamp(System.currentTimeMillis()));
+//        AddressDto addressInfoForOrder = addressService.getAddressInfoForOrder(shopOrderRequestDto.getAddressId()); //Address info
         shopOrder.setOrderStatus(orderStatusRepository.findByStatus("Ordered"));
         Long siteUserId = shopOrderRequestDto.getSiteUserId();
-        shopOrder.setSiteUser(siteUserService.getSiteUser(siteUserId));
+        SiteUser siteUser = siteUserService.getSiteUser(siteUserId);
+        shopOrder.setSiteUser(siteUser);
         shopOrder.setAddress(addressService.getAddress(shopOrderRequestDto.getAddressId()));
-        shopOrder.setUserPaymentMethod(userPaymentMethodService.getUserPaymentMethod(shopOrderRequestDto.getUserPaymentMethodId()));  // TODO can create order without having to have payment method first
+        shopOrder.setUserPaymentMethod(userPaymentMethodService.getUserPaymentMethod(shopOrderRequestDto.getUserPaymentMethodId()));
         shopOrder.setShippingMethod(getShippingMethod(shopOrderRequestDto.getShippingMethodId()));
         shopOrderRepository.save(shopOrder);
         // shoppingCard into orderLine
 
         BigDecimal orderLineTotal = orderLineService.shoppingCardToShopOrder(siteUserId, shopOrder);
-//        ShopOrder shopOrderQ = getShopOrder(shopOrder.getId());  //TODO UHHHHHHHHHHHHHHHH order lines still null
-//        List<OrderLine> orderLines = shopOrderQ.getOrderLines();
-//        BigDecimal orderLineTotal = calculatePrice(orderLines);
         BigDecimal shippingPrice = shopOrder.getShippingMethod().getPrice();
-        shopOrder.setOrderTotal(orderLineTotal.add(shippingPrice));
+        BigDecimal orderTotal = orderLineTotal.add(shippingPrice);
+        shopOrder.setOrderTotal(orderTotal);
+
+        //send mail
+        sendReceiptToUser(siteUser.getEmailAddress(),orderTotal.toString());
         return shopOrderRepository.save(shopOrder);
     }
 
-//    private BigDecimal calculatePrice(List<OrderLine> orderLines){
-//        BigDecimal total = BigDecimal.ZERO;
-//        for (OrderLine orderline : orderLines) {
-//            total = total.add(orderline.getPrice());
-//        }
-//        return total;
-//    }
+    private void sendReceiptToUser(String emailAddress, String totalPrice){
+        mailService.sendSimpleMessage(emailAddress, "Order receipt", "we received your order and your total price is " + totalPrice); // move to controller
+    }
 
 
     @Override

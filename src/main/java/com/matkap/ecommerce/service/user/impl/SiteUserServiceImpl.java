@@ -4,6 +4,7 @@ import com.matkap.ecommerce.dto.requestDto.user.SiteUserRequestDto;
 import com.matkap.ecommerce.exception.EntityNotFoundException;
 import com.matkap.ecommerce.model.user.SiteUser;
 import com.matkap.ecommerce.repository.user.SiteUserRepository;
+import com.matkap.ecommerce.repository.user.projections.SiteUserAddresses;
 import com.matkap.ecommerce.service.user.SiteUserService;
 import org.springframework.stereotype.Service;
 
@@ -61,5 +62,10 @@ public class SiteUserServiceImpl implements SiteUserService {
         siteUser.setPhoneNumber(siteUserRequestDto.getPhoneNumber());
 
         return siteUserRepository.save(siteUser);
+    }
+
+    @Override
+    public SiteUserAddresses getAllAddressesByUser(Long siteUserId) {
+        return siteUserRepository.findByAddresses_SiteUser_Id(siteUserId);
     }
 }

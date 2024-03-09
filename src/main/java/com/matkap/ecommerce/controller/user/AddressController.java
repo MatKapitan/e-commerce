@@ -1,6 +1,7 @@
 package com.matkap.ecommerce.controller.user;
 
 
+import com.matkap.ecommerce.dto.projection.AddressAndUserIdProjectionR;
 import com.matkap.ecommerce.dto.requestDto.user.AddressRequestDto;
 import com.matkap.ecommerce.model.user.Address;
 import com.matkap.ecommerce.model.user.Country;
@@ -31,9 +32,9 @@ public class AddressController {
         return new ResponseEntity<>(address, HttpStatus.OK);
     }
 
-    @GetMapping("/get/{AddressId}")
-    public ResponseEntity<Address> getAddressById(@PathVariable Long AddressId){
-        Address address = addressService.getAddressById(AddressId);
+    @GetMapping("/get/{addressId}")
+    public ResponseEntity<Address> getAddressById(@PathVariable Long addressId){
+        Address address = addressService.getAddressById(addressId);
         return new ResponseEntity<>(address, HttpStatus.OK);
     }
 
@@ -48,16 +49,28 @@ public class AddressController {
         return new ResponseEntity<>(countries, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{AddressId}")
-    public ResponseEntity<Void> deleteAddress(@PathVariable Long AddressId){
-        addressService.deleteAddress(AddressId);
+    @DeleteMapping("/delete/{addressId}")
+    public ResponseEntity<Void> deleteAddress(@PathVariable Long addressId){
+        addressService.deleteAddress(addressId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/edit/{AddressId}")
-    public ResponseEntity<Address> editAddress(@PathVariable Long AddressId,
+    @PutMapping("/edit/{addressId}")
+    public ResponseEntity<Address> editAddress(@PathVariable Long addressId,
                                                @Valid @RequestBody AddressRequestDto addressRequestDto){
-        Address address = addressService.editAddress(AddressId, addressRequestDto);
+        Address address = addressService.editAddress(addressId, addressRequestDto);
         return new ResponseEntity<>(address, HttpStatus.OK);
+    }
+
+    @PutMapping("/set-default/{addressId}")
+    public ResponseEntity<Void> setDefaultAddress(@PathVariable Long addressId){
+        addressService.setDefaultAddress(addressId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/test/{id}")
+    public ResponseEntity<AddressAndUserIdProjectionR> testLol(@PathVariable Long id){
+        AddressAndUserIdProjectionR addressAndSiteUserId = addressService.getAddressAndSiteUserId(id);
+        return new ResponseEntity<>(addressAndSiteUserId, HttpStatus.OK);
     }
 }

@@ -58,5 +58,10 @@ public class PaymentController {
         UserPaymentMethod userPaymentMethod = userPaymentMethodService.editUserPaymentMethod(paymentId, userPaymentMethodRequestDto);
         return new ResponseEntity<>(userPaymentMethod, HttpStatus.OK);
     }
+    @PutMapping("/set-default/{paymentId}")
+    public ResponseEntity<Void> setDefault(@PathVariable Long paymentId){
+        userPaymentMethodService.setDefaultPayment(paymentId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }

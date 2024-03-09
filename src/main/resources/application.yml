@@ -28,3 +28,15 @@ spring:
   sql:
     init:
       mode: always
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: fakemailfortestingpurpose@gmail.com
+    password: rkqr wfgr ggjq semr
+    protocol: smtp
+    tls: true
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
+      ssl.trust: smtp.gmail.com

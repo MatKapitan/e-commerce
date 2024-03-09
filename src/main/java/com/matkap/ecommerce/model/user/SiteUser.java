@@ -1,5 +1,9 @@
 package com.matkap.ecommerce.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.matkap.ecommerce.model.payment.UserPaymentMethod;
+import com.matkap.ecommerce.model.review.Review;
+import com.matkap.ecommerce.model.shopingCard.ShoppingCard;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -21,8 +25,22 @@ public class SiteUser {
     @Column(name = "username")
     private String username;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "siteUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> addresses;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "siteUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ShoppingCard> shoppingCards;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "siteUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserPaymentMethod> userPaymentMethods;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "siteUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews;
+
 
     public SiteUser() {
     }

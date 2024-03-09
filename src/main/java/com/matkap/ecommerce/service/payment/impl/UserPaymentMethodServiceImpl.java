@@ -90,4 +90,19 @@ private final SiteUserService siteUserService;
 
         return userPaymentMethodRepository.save(userPaymentMethod);
     }
+
+    @Override
+    public void setDefaultPayment(Long userPaymentMethodId) {
+        UserPaymentMethod userPaymentMethod = getUserPaymentMethod(userPaymentMethodId);
+        Long siteUserId = userPaymentMethod.getSiteUser().getId();
+        List<UserPaymentMethod> currentDefaultPayment = userPaymentMethodRepository.findCurrentDefaultPaymentByUser(siteUserId, Boolean.TRUE);
+        if (!currentDefaultPayment.isEmpty()){
+            for (UserPaymentMethod payment :currentDefaultPayment) {
+                payment.setDefaultPayment(Boolean.FALSE);
+                userPaymentMethodRepository.save(payment);
+            }
+        }
+        userPaymentMethod.setDefaultPayment(Boolean.TRUE);
+        userPaymentMethodRepository.save(userPaymentMethod);
+    }
 }

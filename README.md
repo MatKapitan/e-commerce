@@ -21,16 +21,24 @@ I have made meade a few changes and currenty ER diagram looks like this.
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+Java 17
 
-### Installing
+Docker
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+Maven 
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
+starting docker
 ```
+cd build
+docker compose up -d
+```
+
+starting application
+```
+./mvnw spring-boot:run
+```
+
+
+

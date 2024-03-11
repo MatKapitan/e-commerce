@@ -15,11 +15,12 @@ public class VariationOption {
     @Column(name = "name")
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "variation_id", referencedColumnName = "id")
     private Variation variation;
 
-    @Column(name = "value") //TODO change to something better (sql insert too) cant be value huhh..
+    @Column(name = "value")
     private String value;
 
     @JsonIgnore

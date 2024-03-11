@@ -1,3 +1,22 @@
+--Order_status constants
+INSERT INTO Order_status (status) VALUES ('Ordered');
+INSERT INTO Order_status (status) VALUES ('In Transit');
+INSERT INTO Order_status (status) VALUES ('Delivered');
+INSERT INTO Order_status (status) VALUES ('Cancelled');
+
+--Payment_type constants
+INSERT INTO Payment_type (payment_values) VALUES ('Credit Card');
+INSERT INTO Payment_type (payment_values) VALUES ('Paypal');
+INSERT INTO Payment_type (payment_values) VALUES ('Debit Card');
+
+--Shipping_method constants
+INSERT INTO Shipping_method (name, price) VALUES ('Standard', 10);
+INSERT INTO Shipping_method (name, price) VALUES ('Express', 25);
+INSERT INTO Shipping_method (name, price) VALUES ('Priority', 50);
+-----------------------------------
+
+--Country constants
+-----------------------------------
 INSERT INTO country (name) VALUES ('Albania');
 INSERT INTO country (name) VALUES ('Algeria');
 INSERT INTO country (name) VALUES ('American Samoa');
@@ -223,26 +242,93 @@ INSERT INTO country (name) VALUES ('Yemen');
 INSERT INTO country (name) VALUES ('Zambia');
 INSERT INTO country (name) VALUES ('Afghanistan');
 INSERT INTO country (name) VALUES ('Zimbabwe');
+--------------------------------------------------------
+--------------------------------------------------------
+
+--NOT empty database values
+
+
+--------------------------------------
+--------------------------------------
+--Product_category
+----------------
+INSERT INTO Product_category (category_name) VALUES ('clothing'); -- id 1
+INSERT INTO Product_category (category_name, parent_category_id) VALUES ('male_clothing', 1); --id 2
+INSERT INTO Product_category (category_name, parent_category_id) VALUES ('female_clothing', 1); --id 3
+INSERT INTO Product_category (category_name) VALUES ('accessories'); --id 4
+INSERT INTO Product_category (category_name) VALUES ('variation'); --id 5
+
+
+------------------
+
+INSERT INTO Product (product_category_id, name, description, product_image) VALUES (2, 't-shirts', 'fabric shirt named after the T shape', 't-shirt.jpg' ); -- id 1
+INSERT INTO Product (product_category_id, name, description, product_image) VALUES (2, 'hoodies', 'sweatshirt or a jacket with a hood', 'hoodie.jpg' ); -- id 2
+INSERT INTO Product (product_category_id, name, description, product_image) VALUES (2, 'jeans', 'type of pants or trousers made from denim or dungaree cloth', 'jeans.jpg' ); -- id 3
+----------------------------
+
+INSERT INTO Product_item (product_id, sku, qty_in_stock, product_image, price) VALUES (1, 't-sh-red-S', 7, 'red-t-shirt.jpg', 15.50); --id 1 //red
+INSERT INTO Product_item (product_id, sku, qty_in_stock, product_image, price) VALUES (1, 't-sh-red-L', 2, 'red-t-shirt.jpg', 15.50); --id 2 //red
+INSERT INTO Product_item (product_id, sku, qty_in_stock, product_image, price) VALUES (1, 't-sh-blu-M', 9, 'blue-t-shirt.jpg', 15.50); --id 3 //blue
+INSERT INTO Product_item (product_id, sku, qty_in_stock, product_image, price) VALUES (1, 't-sh-blu-S', 6, 'blue-t-shirt.jpg', 15.50); --id 4 //blue
+INSERT INTO Product_item (product_id, sku, qty_in_stock, product_image, price) VALUES (1, 't-sh-bla-S', 4, 'blue-t-shirt.jpg', 15.50); --id 5 //black
+INSERT INTO Product_item (product_id, sku, qty_in_stock, product_image, price) VALUES (1, 't-sh-bla-L', 2, 'blue-t-shirt.jpg', 15.50); --id 6 //black
+INSERT INTO Product_item (product_id, sku, qty_in_stock, product_image, price) VALUES (2, 'hood-red-S', 11, 'red-hoodie.jpg', 25.20); --id 7 //red
+INSERT INTO Product_item (product_id, sku, qty_in_stock, product_image, price) VALUES (2, 'hood-red-M', 4, 'red-hoodie.jpg', 25.20); --id 8 //red
+INSERT INTO Product_item (product_id, sku, qty_in_stock, product_image, price) VALUES (2, 'hood-blu-M', 6, 'blue-hoodie.jpg', 25.20); --id 9 //blue
+INSERT INTO Product_item (product_id, sku, qty_in_stock, product_image, price) VALUES (2, 'hood-bla-L', 2, 'black-hoodie.jpg', 25.20); --id 10 //black
+INSERT INTO Product_item (product_id, sku, qty_in_stock, product_image, price) VALUES (3, 'jean-bla-L', 22, 'black-jeans.jpg', 30.88); --id 11 //black
+INSERT INTO Product_item (product_id, sku, qty_in_stock, product_image, price) VALUES (3, 'jean-blu-M', 22, 'blue-jeans.jpg', 32.72); --id 12 //blue
+
+--------------------
+
+INSERT INTO Variation (category_id, name) VALUES (5, 'color'); --id 1
+INSERT INTO Variation (category_id, name) VALUES (5, 'size'); --id 2
+
+-------------------
+
+INSERT INTO Variation_option (variation_id, "value") VALUES (1, 'red'); --id 1
+INSERT INTO Variation_option (variation_id, "value") VALUES (1, 'blue'); --id 2
+INSERT INTO Variation_option (variation_id, "value") VALUES (1, 'black'); --id 3
+INSERT INTO Variation_option (variation_id, "value") VALUES (2, 'S'); --id 4
+INSERT INTO Variation_option (variation_id, "value") VALUES (2, 'M'); --id 5
+INSERT INTO Variation_option (variation_id, "value") VALUES (2, 'L'); --id 6
+
+-----------------------------------
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (1, 1); -- 1 - red
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (1, 4); -- 1 - S
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (2, 1); -- 2 - red
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (2, 6); -- 2 - L
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (3, 2); -- 3 - blue
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (3, 5); -- 3 - M
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (4, 2); -- 4 - blue
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (4, 4); -- 4 - S
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (5, 3); -- 5 - black
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (5, 4); -- 5 - S
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (6, 3); -- 6 - black
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (6, 6); -- 6 - L
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (7, 1); -- 7 - red
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (7, 4); -- 7 - S
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (8, 1); -- 8 - red
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (8, 5); -- 8 - M
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (9, 2); -- 9 - blue
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (9, 5); -- 9 - M
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (10, 3); -- 10 - black
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (10, 6); -- 10 - L
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (11, 3); -- 11 - black
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (11, 6); -- 11 - L
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (12, 2); -- 12 - blue
+INSERT INTO Product_configuration (product_item_id, variation_option_id) VALUES (12, 5); -- 12 - M
+-----------------------------
+
+--Site User
+INSERT INTO Site_user (username, password, email_address, phone_number) VALUES ('MatKap','password','matija.kapitan1@gmail.com' ,'12345678910');
+--Address
+INSERT INTO Address (site_user_id, default_address, unit_number, street_number, address_line_1, address_line_2, city, region, postal_code, country_id) VALUES
+                    (1, true, '5', '63', 'Zagrebacka', '', 'Zagreb', 'Zagrebacka', '10000', 49);
 
 
 
-INSERT INTO Product_category (category_name) VALUES ('test');
-INSERT INTO Product_category (category_name, parent_category_id) VALUES ('test_child', 1);
-INSERT INTO Product_category (category_name, parent_category_id) VALUES ('test_child_2', 2);
-INSERT INTO Product_category (category_name, parent_category_id) VALUES ('test_child_3', 2);
 
-
-INSERT INTO Variation (category_id, name) VALUES (1, 'name test');
-
-INSERT INTO Variation_option (variation_id, "value") VALUES (1, 'value test');
-
-
-
-
-
-INSERT INTO payment_type (payment_values) VALUES ('Credit Card');
-INSERT INTO payment_type (payment_values) VALUES ('Paypal');
-INSERT INTO payment_type (payment_values) VALUES ('Debit Card');
 
 
 

@@ -12,5 +12,4 @@ public interface ShopOrderService {
     public ShopOrder getShopOrderById(Long shopOrderId);
     public ShopOrder getShopOrder(Long shopOrderId);
     public void deleteShopOrder(Long shopOrderId);
-    public ShopOrder editShopOrder(Long shopOrderId, ShopOrderRequestDto shopOrderRequestDto);
 }

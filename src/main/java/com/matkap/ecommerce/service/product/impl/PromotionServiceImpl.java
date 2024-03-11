@@ -72,9 +72,6 @@ public class PromotionServiceImpl implements PromotionService {
         return promotion;
     }
 
-//TODO add product Category
-
-
     @Override
     public Promotion addProductCategoryToPromotion(Long promotionId, Long productCategoryId) {
         Promotion promotion = getPromotionOrThrow(promotionId);

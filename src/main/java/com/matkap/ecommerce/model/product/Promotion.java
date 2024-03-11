@@ -37,8 +37,6 @@ public class Promotion {
 
     private List<ProductCategory> productCategory;
 
-    // TODO on delete it wants to cascade productCategory (delete product category stuff)(mappedBy???? i guess)
-
     public Promotion() {
     }
 

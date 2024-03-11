@@ -1,11 +1,9 @@
 package com.matkap.ecommerce.service.user.impl;
 
-import com.matkap.ecommerce.dto.projection.AddressAndUserIdProjectionR;
 import com.matkap.ecommerce.dto.requestDto.user.AddressRequestDto;
 import com.matkap.ecommerce.exception.EntityNotFoundException;
 import com.matkap.ecommerce.model.user.Address;
 import com.matkap.ecommerce.model.user.Country;
-import com.matkap.ecommerce.repository.user.AddressDto;
 import com.matkap.ecommerce.repository.user.AddressRepository;
 import com.matkap.ecommerce.repository.user.CountryRepository;
 import com.matkap.ecommerce.service.user.AddressService;
@@ -46,8 +44,13 @@ public class AddressServiceImpl implements AddressService {
         address.setCity(addressRequestDto.getCity());
         address.setRegion(addressRequestDto.getRegion());
         address.setPostalCode(addressRequestDto.getPostalCode());
-        address.setDefaultAddress(Boolean.FALSE);
-
+        //default address
+        if(addressRequestDto.getDefaultAddress() == Boolean.TRUE){
+            addressRepository.updateDefaultAddressBySiteUser(addressRequestDto.getSiteUserId());
+            address.setDefaultAddress(Boolean.TRUE);
+        }else{
+            address.setDefaultAddress(Boolean.FALSE);
+        }
         return addressRepository.save(address);
     }
 
@@ -108,26 +111,9 @@ public class AddressServiceImpl implements AddressService {
         Address address = getAddress(addressId);
         //get user id
         Long siteUserId = address.getSiteUser().getId();
-        List<Address> currentDefaultAddress = addressRepository.findCurrentDefaultAddressesByUser(siteUserId, Boolean.TRUE);
-        if (!currentDefaultAddress.isEmpty()){
-            for (Address addressToChange : currentDefaultAddress) {
-                addressToChange.setDefaultAddress(Boolean.FALSE);
-                addressRepository.save(addressToChange);
-            }
-        }
+        addressRepository.updateDefaultAddressBySiteUser(siteUserId);
         // set new address as default
         address.setDefaultAddress(Boolean.TRUE);
         addressRepository.save(address);
-    }
-
-    @Override
-    public AddressAndUserIdProjectionR getAddressAndSiteUserId(Long id) {
-        return addressRepository.findAddressAndUserId(id);
-    }
-
-    @Override
-    public AddressDto getAddressInfoForOrder(Long addressId) {
-        return addressRepository.findAddressInfoForOrder(addressId).orElseThrow(
-                () -> new EntityNotFoundException(addressId, Address.class));
     }
 }

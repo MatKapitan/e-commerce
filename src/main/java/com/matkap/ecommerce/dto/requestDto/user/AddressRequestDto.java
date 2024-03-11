@@ -24,6 +24,8 @@ public class AddressRequestDto {
     @NotNull(message = "countryId cannot be null")
     private Long countryId;
 
+    private Boolean defaultAddress;
+
 
 
 
@@ -102,5 +104,13 @@ public class AddressRequestDto {
 
     public void setCountryId(Long countryId) {
         this.countryId = countryId;
+    }
+
+    public Boolean getDefaultAddress() {
+        return defaultAddress;
+    }
+
+    public void setDefaultAddress(Boolean defaultAddress) {
+        this.defaultAddress = defaultAddress;
     }
 }

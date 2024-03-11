@@ -54,7 +54,6 @@ public class ShopOrderServiceImpl implements ShopOrderService {
         //create order
         ShopOrder shopOrder = new ShopOrder();
         shopOrder.setOrderDate(new Timestamp(System.currentTimeMillis()));
-//        AddressDto addressInfoForOrder = addressService.getAddressInfoForOrder(shopOrderRequestDto.getAddressId()); //Address info
         shopOrder.setOrderStatus(orderStatusRepository.findByStatus("Ordered"));
         Long siteUserId = shopOrderRequestDto.getSiteUserId();
         SiteUser siteUser = siteUserService.getSiteUser(siteUserId);
@@ -107,15 +106,4 @@ public class ShopOrderServiceImpl implements ShopOrderService {
         shopOrderRepository.delete(shopOrder);
     }
 
-    @Override
-    public ShopOrder editShopOrder(Long shopOrderId, ShopOrderRequestDto shopOrderRequestDto) {
-        ShopOrder shopOrder = getShopOrder(shopOrderId);
-        shopOrder.setOrderDate(new Timestamp(System.currentTimeMillis()));
-        shopOrder.setOrderStatus(orderStatusRepository.findByStatus("Drafted"));
-        shopOrder.setSiteUser(siteUserService.getSiteUser(shopOrderRequestDto.getSiteUserId()));
-        shopOrder.setAddress(addressService.getAddress(shopOrderRequestDto.getAddressId()));
-        shopOrder.setUserPaymentMethod(userPaymentMethodService.getUserPaymentMethod(shopOrderRequestDto.getUserPaymentMethodId()));  // TODO can create order without having to have payment method first
-
-        return shopOrderRepository.save(shopOrder);
-    }
 }

@@ -31,14 +31,20 @@ private final SiteUserService siteUserService;
     @Override
     public UserPaymentMethod createUserPaymentMethod(UserPaymentMethodRequestDto userPaymentMethodRequestDto) {
         UserPaymentMethod userPaymentMethod = new UserPaymentMethod();
-        SiteUser siteUser = siteUserService.getSiteUser(userPaymentMethodRequestDto.getSiteUserId());
+        Long siteUserId = userPaymentMethodRequestDto.getSiteUserId();
+        SiteUser siteUser = siteUserService.getSiteUser(siteUserId);
         userPaymentMethod.setSiteUser(siteUser);
         PaymentType paymentType = getPaymentType(userPaymentMethodRequestDto.getPaymentTypeId());
         userPaymentMethod.setPaymentType(paymentType);
         userPaymentMethod.setProvider(userPaymentMethodRequestDto.getProvider());
         userPaymentMethod.setAccountNumber(userPaymentMethodRequestDto.getAccountNumber());
         userPaymentMethod.setExpiryDate(userPaymentMethodRequestDto.getExpiryDate());
-        userPaymentMethod.setDefaultPayment(false);
+        if (userPaymentMethod.getDefaultPayment() == Boolean.TRUE){
+            userPaymentMethodRepository.updateDefaultPaymentBySiteUser(siteUserId);
+            userPaymentMethod.setDefaultPayment(Boolean.TRUE);
+        }else{
+            userPaymentMethod.setDefaultPayment(Boolean.FALSE);
+        }
 
         return userPaymentMethodRepository.save(userPaymentMethod);
     }
@@ -79,15 +85,20 @@ private final SiteUserService siteUserService;
     @Override
     public UserPaymentMethod editUserPaymentMethod(Long userPaymentMethodId, UserPaymentMethodRequestDto userPaymentMethodRequestDto) {
         UserPaymentMethod userPaymentMethod = getUserPaymentMethod(userPaymentMethodId);
-        SiteUser siteUser = siteUserService.getSiteUser(userPaymentMethodRequestDto.getSiteUserId());
+        Long siteUserId = userPaymentMethodRequestDto.getSiteUserId();
+        SiteUser siteUser = siteUserService.getSiteUser(siteUserId);
         userPaymentMethod.setSiteUser(siteUser);
         PaymentType paymentType = getPaymentType(userPaymentMethodRequestDto.getPaymentTypeId());
         userPaymentMethod.setPaymentType(paymentType);
         userPaymentMethod.setProvider(userPaymentMethodRequestDto.getProvider());
         userPaymentMethod.setAccountNumber(userPaymentMethodRequestDto.getAccountNumber());
         userPaymentMethod.setExpiryDate(userPaymentMethodRequestDto.getExpiryDate());
-        userPaymentMethod.setDefaultPayment(false); //TODO one true unique
-
+        if (userPaymentMethod.getDefaultPayment() == Boolean.TRUE){
+            userPaymentMethodRepository.updateDefaultPaymentBySiteUser(siteUserId);
+            userPaymentMethod.setDefaultPayment(Boolean.TRUE);
+        }else{
+            userPaymentMethod.setDefaultPayment(Boolean.FALSE);
+        }
         return userPaymentMethodRepository.save(userPaymentMethod);
     }
 
@@ -95,13 +106,8 @@ private final SiteUserService siteUserService;
     public void setDefaultPayment(Long userPaymentMethodId) {
         UserPaymentMethod userPaymentMethod = getUserPaymentMethod(userPaymentMethodId);
         Long siteUserId = userPaymentMethod.getSiteUser().getId();
-        List<UserPaymentMethod> currentDefaultPayment = userPaymentMethodRepository.findCurrentDefaultPaymentByUser(siteUserId, Boolean.TRUE);
-        if (!currentDefaultPayment.isEmpty()){
-            for (UserPaymentMethod payment :currentDefaultPayment) {
-                payment.setDefaultPayment(Boolean.FALSE);
-                userPaymentMethodRepository.save(payment);
-            }
-        }
+        userPaymentMethodRepository.updateDefaultPaymentBySiteUser(siteUserId);
+
         userPaymentMethod.setDefaultPayment(Boolean.TRUE);
         userPaymentMethodRepository.save(userPaymentMethod);
     }

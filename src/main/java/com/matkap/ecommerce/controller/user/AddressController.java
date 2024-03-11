@@ -1,12 +1,10 @@
 package com.matkap.ecommerce.controller.user;
 
 
-import com.matkap.ecommerce.dto.projection.AddressAndUserIdProjectionR;
 import com.matkap.ecommerce.dto.requestDto.user.AddressRequestDto;
 import com.matkap.ecommerce.model.user.Address;
 import com.matkap.ecommerce.model.user.Country;
 import com.matkap.ecommerce.service.user.AddressService;
-import jakarta.persistence.Entity;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,11 +64,5 @@ public class AddressController {
     public ResponseEntity<Void> setDefaultAddress(@PathVariable Long addressId){
         addressService.setDefaultAddress(addressId);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("/test/{id}")
-    public ResponseEntity<AddressAndUserIdProjectionR> testLol(@PathVariable Long id){
-        AddressAndUserIdProjectionR addressAndSiteUserId = addressService.getAddressAndSiteUserId(id);
-        return new ResponseEntity<>(addressAndSiteUserId, HttpStatus.OK);
     }
 }

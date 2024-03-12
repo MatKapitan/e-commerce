@@ -12,7 +12,8 @@ Watching this video i had idea to implement the design and that will be great le
 
 I have made meade a few changes and currenty ER diagram looks like this.
 
-![postgres - public](https://github.com/MatKapitan/e-commerce/assets/92732800/016bc76f-f49b-4d16-be42-e568d0a70008)
+![final drawio](https://github.com/MatKapitan/e-commerce/assets/92732800/b8674fb2-92d4-40c2-b0ee-77588f57b815)
+
 
 
 

@@ -1,6 +1,7 @@
 package com.matkap.ecommerce.service.product.impl;
 
 import com.matkap.ecommerce.dto.Mapper;
+import com.matkap.ecommerce.dto.ProductMapper;
 import com.matkap.ecommerce.dto.requestDto.product.ProductRequestDto;
 import com.matkap.ecommerce.dto.responseDto.product.ProductResponseDto;
 import com.matkap.ecommerce.exception.EntityNotFoundException;
@@ -20,9 +21,12 @@ public class ProductServiceImpl implements ProductService {
 
    private final ProductCategoryService productCategoryService;
 
-    public ProductServiceImpl(ProductRepository productItemRepository, ProductCategoryService productCategoryService) {
+   private final ProductMapper productMapper;
+
+    public ProductServiceImpl(ProductRepository productItemRepository, ProductCategoryService productCategoryService, ProductMapper productMapper) {
         this.productRepository = productItemRepository;
         this.productCategoryService = productCategoryService;
+        this.productMapper = productMapper;
     }
 
 

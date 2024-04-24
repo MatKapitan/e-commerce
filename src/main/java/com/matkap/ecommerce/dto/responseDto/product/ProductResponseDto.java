@@ -10,9 +10,9 @@ public class ProductResponseDto {
 
     private String description;
 
-    private String product_image;
+    private String productImage;
 
-    private ProductCategory productCategory;
+    private String categoryName;
 
 
     public ProductResponseDto() {
@@ -43,19 +43,19 @@ public class ProductResponseDto {
         this.description = description;
     }
 
-    public String getProduct_image() {
-        return product_image;
+    public String getProductImage() {
+        return productImage;
     }
 
-    public void setProduct_image(String product_image) {
-        this.product_image = product_image;
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 
-    public ProductCategory getProductCategory() {
-        return productCategory;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setProductCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }

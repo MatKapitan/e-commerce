@@ -5,6 +5,7 @@ import com.matkap.ecommerce.model.product.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Mapper {
 
@@ -13,8 +14,8 @@ public class Mapper {
         productResponseDto.setId(product.getId());
         productResponseDto.setName(product.getName());
         productResponseDto.setDescription(product.getDescription());
-        productResponseDto.setProduct_image(product.getProductImage());
-        productResponseDto.setProductCategory(product.getProductCategory());
+        productResponseDto.setProductImage(product.getProductImage());
+        productResponseDto.setCategoryName(product.getProductCategory().getCategoryName());
         return productResponseDto;
     }
 
@@ -29,12 +30,12 @@ public class Mapper {
     public static ProductItemResponseDto productItemToProductItemResponseDto(ProductItem productItem){
         ProductItemResponseDto productItemResponseDto = new ProductItemResponseDto();
         productItemResponseDto.setId(productItem.getId());
-        productItemResponseDto.setQty_in_stock(productItem.getQtyInStock());
-        productItemResponseDto.setProduct(productItem.getProduct());
+        productItemResponseDto.setQtyInStock(productItem.getQtyInStock());
+        productItemResponseDto.setProduct(productItem.getProduct().getName());
         productItemResponseDto.setSKU(productItem.getSku());
         productItemResponseDto.setPrice(productItem.getPrice());
-        productItemResponseDto.setProduct_image(productItem.getProductImage());
-        productItemResponseDto.setVariationOptions(productItem.getVariationOptions());
+        productItemResponseDto.setProductImage(productItem.getProductImage());
+        productItemResponseDto.setVariationOptionValues(productItem.getVariationOptions().stream().map(x -> x.getValue()).collect(Collectors.toList()));
         return productItemResponseDto;
     }
 
@@ -48,10 +49,10 @@ public class Mapper {
 
     public static ProductCategoryResponseDto productCategoryToProductCategoryResponseDto(ProductCategory productCategory){
         ProductCategoryResponseDto productCategoryResponseDto = new ProductCategoryResponseDto();
-        productCategoryResponseDto.setProduct_category_id(productCategory.getId());
-        productCategoryResponseDto.setCategory_name(productCategory.getCategoryName());
-        productCategoryResponseDto.setParent_category(productCategory.getParent_category());
-        productCategoryResponseDto.setChild_category(productCategory.getChildren_category());
+        productCategoryResponseDto.setProductCategoryId(productCategory.getId());
+        productCategoryResponseDto.setCategoryName(productCategory.getCategoryName());
+        productCategoryResponseDto.setParentCategory(productCategory.getParent_category());
+        productCategoryResponseDto.setChildCategory(productCategory.getChildren_category());
         return productCategoryResponseDto;
     }
 
@@ -66,7 +67,7 @@ public class Mapper {
     public static VariationResponseDto variationToVariationResponseDto(Variation variation){
         VariationResponseDto variationResponseDto = new VariationResponseDto();
         variationResponseDto.setId(variation.getId());
-        variationResponseDto.setProductCategory(variation.getProductCategory());
+        variationResponseDto.setCategoryName(variation.getProductCategory().getCategoryName()); //***********************************
         variationResponseDto.setName(variation.getName());
         return variationResponseDto;
     }
@@ -82,7 +83,7 @@ public class Mapper {
     public static VariationOptionResponseDto variationOptionToVariationOptionResponseDto(VariationOption variationOption){
         VariationOptionResponseDto variationOptionResponseDto = new VariationOptionResponseDto();
         variationOptionResponseDto.setId(variationOption.getId());
-        variationOptionResponseDto.setVariation(variationOption.getVariation());
+        variationOptionResponseDto.setVariationName(variationOption.getVariation().getName());
         variationOptionResponseDto.setValue(variationOption.getValue());
         return variationOptionResponseDto;
     }

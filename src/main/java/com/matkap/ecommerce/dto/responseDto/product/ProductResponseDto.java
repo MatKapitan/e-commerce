@@ -1,7 +1,5 @@
 package com.matkap.ecommerce.dto.responseDto.product;
 
-import com.matkap.ecommerce.model.product.ProductCategory;
-
 public class ProductResponseDto {
 
 

@@ -1,11 +1,9 @@
 package com.matkap.ecommerce.dto.responseDto.product;
 
-import com.matkap.ecommerce.model.product.ProductCategory;
-
 public class VariationResponseDto {
 
     private Long id;
-    private ProductCategory productCategory;
+    private String categoryName;
     private String name;
 
     public VariationResponseDto() {
@@ -19,12 +17,12 @@ public class VariationResponseDto {
         this.id = id;
     }
 
-    public ProductCategory getProductCategory() {
-        return productCategory;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setProductCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public String getName() {

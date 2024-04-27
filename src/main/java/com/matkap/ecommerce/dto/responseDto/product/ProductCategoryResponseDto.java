@@ -6,12 +6,12 @@ import java.util.List;
 
 public class ProductCategoryResponseDto {
 
-    private Long product_category_id;
-    private String category_name;
+    private Long productCategoryId;
+    private String categoryName;
 
-    private ProductCategory parent_category;
+    private ProductCategory parentCategory;
 
-    private List<ProductCategory> child_category;
+    private List<ProductCategory> childCategory;
 
 
 
@@ -19,35 +19,35 @@ public class ProductCategoryResponseDto {
     public ProductCategoryResponseDto() {
     }
 
-    public String getCategory_name() {
-        return category_name;
+    public Long getProductCategoryId() {
+        return productCategoryId;
     }
 
-    public Long getProduct_category_id() {
-        return product_category_id;
+    public void setProductCategoryId(Long productCategoryId) {
+        this.productCategoryId = productCategoryId;
     }
 
-    public void setProduct_category_id(Long product_category_id) {
-        this.product_category_id = product_category_id;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategory_name(String category_name) {
-        this.category_name = category_name;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public ProductCategory getParent_category() {
-        return parent_category;
+    public ProductCategory getParentCategory() {
+        return parentCategory;
     }
 
-    public void setParent_category(ProductCategory parent_category) {
-        this.parent_category = parent_category;
+    public void setParentCategory(ProductCategory parentCategory) {
+        this.parentCategory = parentCategory;
     }
 
-    public List<ProductCategory> getChild_category() {
-        return child_category;
+    public List<ProductCategory> getChildCategory() {
+        return childCategory;
     }
 
-    public void setChild_category(List<ProductCategory> child_category) {
-        this.child_category = child_category;
+    public void setChildCategory(List<ProductCategory> childCategory) {
+        this.childCategory = childCategory;
     }
 }

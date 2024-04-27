@@ -1,11 +1,9 @@
 package com.matkap.ecommerce.dto.responseDto.product;
 
-import com.matkap.ecommerce.model.product.Variation;
-
 public class VariationOptionResponseDto {
 
     private Long id;
-    private Variation variation;
+    private String variationName;
     private String value;
 
 
@@ -20,12 +18,12 @@ public class VariationOptionResponseDto {
         this.id = id;
     }
 
-    public Variation getVariation() {
-        return variation;
+    public String getVariationName() {
+        return variationName;
     }
 
-    public void setVariation(Variation variation) {
-        this.variation = variation;
+    public void setVariationName(String variationName) {
+        this.variationName = variationName;
     }
 
     public String getValue() {

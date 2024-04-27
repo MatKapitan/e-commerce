@@ -1,22 +1,13 @@
 server:
   port: 8080
-#  servlet:
-#    context-path: /spring-boot-best-practices/api/v1
-
 
 spring:
-#  jackson:
-#    # Date format string or a fully-qualified date format class name. For instance, 'yyyy-MM-dd HH:mm:ss'
-#    date-format: "yyyy-MM-dd HH:mm:ss"
-#
-#    # Locale used for formatting
-#    time-zone: "GMT+8"
   jpa:
     database: POSTGRESQL
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
-    defer-datasource-initialization: true
+      ddl-auto: create
+#    defer-datasource-initialization: false
 
   datasource:
     platform: postgres
@@ -25,9 +16,9 @@ spring:
     password: password
     driverClassName: org.postgresql.Driver
 
-  sql:
-    init:
-      mode: always
+#  sql:
+#    init:
+#      mode: always
 
   mail:
     host: smtp.gmail.com

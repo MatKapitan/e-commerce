@@ -12,7 +12,7 @@ public class VariationOption {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "name")
+    @Column(name = "id")
     private Long id;
 
     @JsonIgnore

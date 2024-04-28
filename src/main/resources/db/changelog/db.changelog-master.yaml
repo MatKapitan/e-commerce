@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id:  1
+      author:  MatKapitan
+      changes:
+        - sqlFile:
+            path: db/changelog/initial.sql
+            stripComments: true
+
+  - changeSet:
+      id: 2
+      author: MatKapitan
+      changes:
+        - sqlFile:
+            path: db/changelog/data.sql
+            stripComments: true
+
+
+

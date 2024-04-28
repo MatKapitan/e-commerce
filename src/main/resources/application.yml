@@ -5,8 +5,8 @@ spring:
   jpa:
     database: POSTGRESQL
     show-sql: true
-    hibernate:
-      ddl-auto: create
+#    hibernate:
+#      ddl-auto: create
 #    defer-datasource-initialization: false
 
   datasource:

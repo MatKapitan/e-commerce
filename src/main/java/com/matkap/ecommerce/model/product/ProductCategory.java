@@ -35,10 +35,16 @@ public class ProductCategory {
     private List<Promotion> promotions = new ArrayList<>();
 
 
+    public ProductCategory(Long id, ProductCategory parent_category, List<ProductCategory> children_category, String categoryName, List<Promotion> promotions) {
+        this.id = id;
+        this.parent_category = parent_category;
+        this.children_category = children_category;
+        this.categoryName = categoryName;
+        this.promotions = promotions;
+    }
 
-
-
-
+    public ProductCategory() {
+    }
 
     public Long getId() {
         return id;

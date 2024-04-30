@@ -20,7 +20,15 @@ public class ProductItemResponseDto {
     private List<String> variationOptionValues;
 
 
-
+    public ProductItemResponseDto(Long id, String product, String SKU, Long qtyInStock, String productImage, BigDecimal price, List<String> variationOptionValues) {
+        this.id = id;
+        this.product = product;
+        this.SKU = SKU;
+        this.qtyInStock = qtyInStock;
+        this.productImage = productImage;
+        this.price = price;
+        this.variationOptionValues = variationOptionValues;
+    }
 
     public ProductItemResponseDto() {
     }

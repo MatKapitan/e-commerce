@@ -9,10 +9,10 @@ public class ProductCategoryRequestDto {
     private Long parentCategoryId;
 
 
-
-
-
-
+    public ProductCategoryRequestDto(String categoryName, Long parentCategoryId) {
+        this.categoryName = categoryName;
+        this.parentCategoryId = parentCategoryId;
+    }
 
     public ProductCategoryRequestDto() {
     }

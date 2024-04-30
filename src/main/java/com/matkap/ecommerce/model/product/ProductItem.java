@@ -41,6 +41,18 @@ public class ProductItem {
     @OneToMany(mappedBy = "productItem")
     private List<ShoppingCard> shoppingCards;
 
+
+    public ProductItem(Long id, String sku, Long qtyInStock, String productImage, BigDecimal price, Product product, List<VariationOption> variationOptions, List<ShoppingCard> shoppingCards) {
+        this.id = id;
+        this.sku = sku;
+        this.qtyInStock = qtyInStock;
+        this.productImage = productImage;
+        this.price = price;
+        this.product = product;
+        this.variationOptions = variationOptions;
+        this.shoppingCards = shoppingCards;
+    }
+
     public ProductItem() {
     }
 

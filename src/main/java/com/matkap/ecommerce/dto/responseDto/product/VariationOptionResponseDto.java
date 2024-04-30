@@ -7,6 +7,12 @@ public class VariationOptionResponseDto {
     private String value;
 
 
+    public VariationOptionResponseDto(Long id, String variationName, String value) {
+        this.id = id;
+        this.variationName = variationName;
+        this.value = value;
+    }
+
     public VariationOptionResponseDto() {
     }
 

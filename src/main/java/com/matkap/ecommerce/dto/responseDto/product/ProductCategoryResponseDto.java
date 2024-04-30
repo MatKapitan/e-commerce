@@ -14,7 +14,12 @@ public class ProductCategoryResponseDto {
     private List<ProductCategory> childCategory;
 
 
-
+    public ProductCategoryResponseDto(Long productCategoryId, String categoryName, ProductCategory parentCategory, List<ProductCategory> childCategory) {
+        this.productCategoryId = productCategoryId;
+        this.categoryName = categoryName;
+        this.parentCategory = parentCategory;
+        this.childCategory = childCategory;
+    }
 
     public ProductCategoryResponseDto() {
     }

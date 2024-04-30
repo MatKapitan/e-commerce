@@ -10,6 +10,11 @@ public class VariationRequestDto {
     @NotBlank(message = "name cannot be blank")
     private String name;
 
+    public VariationRequestDto(Long categoryId, String name) {
+        this.categoryId = categoryId;
+        this.name = name;
+    }
+
     public VariationRequestDto() {
     }
 

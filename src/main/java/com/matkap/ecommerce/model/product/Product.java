@@ -27,6 +27,19 @@ public class Product {
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductItem> productItems;
 
+
+    public Product(Long id, String name, String description, String productImage, ProductCategory productCategory, List<ProductItem> productItems) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.productImage = productImage;
+        this.productCategory = productCategory;
+        this.productItems = productItems;
+    }
+
+    public Product() {
+    }
+
     public Long getId() {
         return id;
     }

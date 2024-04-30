@@ -24,6 +24,13 @@ public class ProductItemRequestDto {
     @NotNull(message = "productId cannot be null")
     private Long productId;
 
+    public ProductItemRequestDto(String sku, Long quantityInStock, String productImage, BigDecimal price, Long productId) {
+        this.sku = sku;
+        this.quantityInStock = quantityInStock;
+        this.productImage = productImage;
+        this.price = price;
+        this.productId = productId;
+    }
 
     public ProductItemRequestDto() {
     }

@@ -17,6 +17,13 @@ public class Variation {
     @Column(name = "name")
     private String name;
 
+
+    public Variation(Long id, ProductCategory productCategory, String name) {
+        this.id = id;
+        this.productCategory = productCategory;
+        this.name = name;
+    }
+
     public Variation() {
     }
 

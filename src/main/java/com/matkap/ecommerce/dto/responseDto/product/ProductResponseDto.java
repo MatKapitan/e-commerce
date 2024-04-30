@@ -12,6 +12,13 @@ public class ProductResponseDto {
 
     private String categoryName;
 
+    public ProductResponseDto(Long id, String name, String description, String productImage, String categoryName) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.productImage = productImage;
+        this.categoryName = categoryName;
+    }
 
     public ProductResponseDto() {
     }

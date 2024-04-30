@@ -28,6 +28,13 @@ public class VariationOption {
     private List<ProductItem> productItems = new ArrayList<>();
 
 
+    public VariationOption(Long id, Variation variation, String value, List<ProductItem> productItems) {
+        this.id = id;
+        this.variation = variation;
+        this.value = value;
+        this.productItems = productItems;
+    }
+
     public VariationOption() {
     }
 

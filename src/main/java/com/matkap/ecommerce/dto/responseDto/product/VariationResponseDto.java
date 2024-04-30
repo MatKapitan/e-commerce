@@ -6,6 +6,12 @@ public class VariationResponseDto {
     private String categoryName;
     private String name;
 
+    public VariationResponseDto(Long id, String categoryName, String name) {
+        this.id = id;
+        this.categoryName = categoryName;
+        this.name = name;
+    }
+
     public VariationResponseDto() {
     }
 

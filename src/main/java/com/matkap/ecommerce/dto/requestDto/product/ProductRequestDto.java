@@ -13,6 +13,13 @@ public class ProductRequestDto {
     @NotNull(message = "productCategoryId cannot be null")
     private Long productCategoryId;
 
+    public ProductRequestDto(String name, String description, String productImage, Long productCategoryId) {
+        this.name = name;
+        this.description = description;
+        this.productImage = productImage;
+        this.productCategoryId = productCategoryId;
+    }
+
     public ProductRequestDto() {
     }
 

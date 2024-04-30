@@ -25,6 +25,13 @@ public class PromotionRequestDto {
     private Timestamp endDate;
 
 
+    public PromotionRequestDto(String name, String description, Double discountRate, Timestamp startDate, Timestamp endDate) {
+        this.name = name;
+        this.description = description;
+        this.discountRate = discountRate;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 
     public PromotionRequestDto() {
     }

@@ -10,6 +10,10 @@ public class VariationOptionRequestDto {
     @NotBlank(message = "value cannot be blank")
     private String value;
 
+    public VariationOptionRequestDto(Long variationId, String value) {
+        this.variationId = variationId;
+        this.value = value;
+    }
 
     public VariationOptionRequestDto() {
     }

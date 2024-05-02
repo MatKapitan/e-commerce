@@ -18,8 +18,7 @@ public class Variation {
     private String name;
 
 
-    public Variation(Long id, ProductCategory productCategory, String name) {
-        this.id = id;
+    public Variation(ProductCategory productCategory, String name) {
         this.productCategory = productCategory;
         this.name = name;
     }

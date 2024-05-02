@@ -28,13 +28,11 @@ public class Product {
     private List<ProductItem> productItems;
 
 
-    public Product(Long id, String name, String description, String productImage, ProductCategory productCategory, List<ProductItem> productItems) {
-        this.id = id;
+    public Product(String name, String description, String productImage, ProductCategory productCategory) {
         this.name = name;
         this.description = description;
         this.productImage = productImage;
         this.productCategory = productCategory;
-        this.productItems = productItems;
     }
 
     public Product() {

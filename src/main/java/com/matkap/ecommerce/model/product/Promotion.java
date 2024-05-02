@@ -38,14 +38,12 @@ public class Promotion {
     private List<ProductCategory> productCategory;
 
 
-    public Promotion(Long id, String name, String description, Double discountRate, Timestamp startDate, Timestamp endDate, List<ProductCategory> productCategory) {
-        this.id = id;
+    public Promotion(String name, String description, Double discountRate, Timestamp startDate, Timestamp endDate) {
         this.name = name;
         this.description = description;
         this.discountRate = discountRate;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.productCategory = productCategory;
     }
 
     public Promotion() {

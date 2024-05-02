@@ -42,15 +42,12 @@ public class ProductItem {
     private List<ShoppingCard> shoppingCards;
 
 
-    public ProductItem(Long id, String sku, Long qtyInStock, String productImage, BigDecimal price, Product product, List<VariationOption> variationOptions, List<ShoppingCard> shoppingCards) {
-        this.id = id;
+    public ProductItem(String sku, Long qtyInStock, String productImage, BigDecimal price, Product product) {
         this.sku = sku;
         this.qtyInStock = qtyInStock;
         this.productImage = productImage;
         this.price = price;
         this.product = product;
-        this.variationOptions = variationOptions;
-        this.shoppingCards = shoppingCards;
     }
 
     public ProductItem() {

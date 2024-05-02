@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ProductItemServiceImpl implements ProductItemService {
@@ -36,6 +37,7 @@ public class ProductItemServiceImpl implements ProductItemService {
     @Override
     public ProductItemResponseDto createProductItem(ProductItemRequestDto productItemRequestDto) {
 
+        Objects.requireNonNull(productItemRequestDto, "productItemRequestDto must not be null"); //TODO for all parameters
         ProductItem productItem = new ProductItem();
         productItem.setSku(productItemRequestDto.getSku());
         productItem.setQtyInStock(productItemRequestDto.getQuantityInStock());

@@ -38,7 +38,7 @@ class ProductCategoryServiceImplTest {
     @Test
     public void should_successfully_save_a_product_category(){
         ProductCategoryRequestDto dto = new ProductCategoryRequestDto("clothing", null);
-        ProductCategory productCategory = new ProductCategory(1L, null, null,"clothing");
+        ProductCategory productCategory = new ProductCategory(null, null,"clothing");
         when(productCategoryRepository.save(productCategory)).thenReturn(productCategory);
 
         ProductCategoryResponseDto result = productCategoryService.createProductCategory(dto);
@@ -48,9 +48,9 @@ class ProductCategoryServiceImplTest {
     }
     @Test
     public void should_successfully_save_a_product_category_with_parent(){
-        ProductCategory productCategoryParent = new ProductCategory(1L, null, null,"clothing");
+        ProductCategory productCategoryParent = new ProductCategory(null, null,"clothing");
         ProductCategoryRequestDto dto = new ProductCategoryRequestDto("male_clothing", 1L);
-        ProductCategory productCategoryChild = new ProductCategory(2L, productCategoryParent, null,"male_clothing");
+        ProductCategory productCategoryChild = new ProductCategory(productCategoryParent, null,"male_clothing");
         when(productCategoryRepository.save(productCategoryChild)).thenReturn(productCategoryChild);
         when(productCategoryRepository.findById(anyLong())).thenReturn(Optional.of(productCategoryParent));
 
@@ -63,7 +63,7 @@ class ProductCategoryServiceImplTest {
 
     @Test
     public void should_return_product_category_by_id(){
-        ProductCategory productCategory = new ProductCategory(1L, null, null,"clothing");
+        ProductCategory productCategory = new ProductCategory(null, null,"clothing");
         when(productCategoryRepository.findById(anyLong())).thenReturn(Optional.of(productCategory));
 
         ProductCategoryResponseDto result = productCategoryService.getProductCategoryById(anyLong());
@@ -82,8 +82,8 @@ class ProductCategoryServiceImplTest {
     @Test
     public void should_return_all_product_categories(){
         List<ProductCategory> productCategoryList = Arrays.asList(
-                new ProductCategory(1L, null, null, "clothing"),
-                new ProductCategory(2L, null, null, "male_clothing"));
+                new ProductCategory(null, null, "clothing"),
+                new ProductCategory(null, null, "male_clothing"));
         when(productCategoryRepository.findAll()).thenReturn(productCategoryList);
 
         List<ProductCategoryResponseDto> result = productCategoryService.getProductCategories();
@@ -96,7 +96,7 @@ class ProductCategoryServiceImplTest {
 
     @Test
     public void should_delete_product_category(){
-        ProductCategory productCategory = new ProductCategory(1L, null, null, "clothing");
+        ProductCategory productCategory = new ProductCategory(null, null, "clothing");
         when(productCategoryRepository.findById(anyLong())).thenReturn(Optional.of(productCategory));
 
         productCategoryService.deleteProductCategory(anyLong());
@@ -105,7 +105,7 @@ class ProductCategoryServiceImplTest {
 
     @Test
     public void should_successfully_edit_a_product_category(){
-        ProductCategory productCategoryToEdit = new ProductCategory(1L, null, null, "clothing");
+        ProductCategory productCategoryToEdit = new ProductCategory(null, null, "clothing");
         when(productCategoryRepository.findById(anyLong())).thenReturn(Optional.of(productCategoryToEdit));
         ProductCategoryRequestDto dto = new ProductCategoryRequestDto("female_clothing", null);
 

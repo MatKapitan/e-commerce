@@ -30,10 +30,11 @@ public class VariationServiceImpl implements VariationService {
     public VariationResponseDto createVariation(VariationRequestDto variationRequestDto) {
         Variation variation = new Variation();
         variation.setName(variationRequestDto.getName());
-        if (variationRequestDto.getCategoryId() != null){
-            ProductCategory productCategory = productCategoryService.getProductCategory(variationRequestDto.getCategoryId());
-            variation.setProductCategory(productCategory);
+        if (variationRequestDto.getCategoryId() == null){
+            throw new IllegalArgumentException("Variation has to have a category");
         }
+        ProductCategory productCategory = productCategoryService.getProductCategory(variationRequestDto.getCategoryId());
+        variation.setProductCategory(productCategory);
         variationRepository.save(variation);
         return Mapper.variationToVariationResponseDto(variation);
     }
@@ -65,10 +66,11 @@ public class VariationServiceImpl implements VariationService {
     public VariationResponseDto editVariation(Long validationId, VariationRequestDto variationRequestDto) {
         Variation variationToEdit = getVariation(validationId);
         variationToEdit.setName(variationRequestDto.getName());
-        if (variationRequestDto.getCategoryId() != null){
-            ProductCategory productCategory = productCategoryService.getProductCategory(variationRequestDto.getCategoryId());
-            variationToEdit.setProductCategory(productCategory);
+        if (variationRequestDto.getCategoryId() == null){
+            throw new IllegalArgumentException("Variation has to have a category");
         }
+        ProductCategory productCategory = productCategoryService.getProductCategory(variationRequestDto.getCategoryId());
+        variationToEdit.setProductCategory(productCategory);
 
         return Mapper.variationToVariationResponseDto(variationToEdit);
     }

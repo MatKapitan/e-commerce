@@ -31,10 +31,11 @@ private final VariationService variationService;
     public VariationOptionResponseDto createVariationOption(VariationOptionRequestDto variationOptionRequestDto) {
         VariationOption variationOption = new VariationOption();
         variationOption.setValue(variationOptionRequestDto.getValue());
-        if (variationOptionRequestDto.getVariationId() != null){
-            Variation variation = variationService.getVariation(variationOptionRequestDto.getVariationId());
-            variationOption.setVariation(variation);
+        if (variationOptionRequestDto.getVariationId() == null){
+            throw new IllegalArgumentException("Variation option has to have a variation");
         }
+        Variation variation = variationService.getVariation(variationOptionRequestDto.getVariationId());
+        variationOption.setVariation(variation);
         variationOptionRepository.save(variationOption);
         return Mapper.variationOptionToVariationOptionResponseDto(variationOption);
     }
@@ -68,10 +69,11 @@ private final VariationService variationService;
                                                           VariationOptionRequestDto variationOptionRequestDto) {
         VariationOption variationOption = getVariationOption(validationOptionId);
         variationOption.setValue(variationOptionRequestDto.getValue());
-        if (variationOptionRequestDto.getVariationId() != null){
-            Variation variation = variationService.getVariation(variationOptionRequestDto.getVariationId());
-            variationOption.setVariation(variation);
+        if (variationOptionRequestDto.getVariationId() == null){
+            throw new IllegalArgumentException("Variation option has to have a variation");
         }
+        Variation variation = variationService.getVariation(variationOptionRequestDto.getVariationId());
+        variationOption.setVariation(variation);
         return Mapper.variationOptionToVariationOptionResponseDto(variationOption);
     }
 }

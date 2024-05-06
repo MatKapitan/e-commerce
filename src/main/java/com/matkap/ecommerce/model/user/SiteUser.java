@@ -24,7 +24,6 @@ public class SiteUser {
     private String password;
     @Column(name = "username")
     private String username;
-
     @JsonIgnore
     @OneToMany(mappedBy = "siteUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> addresses;
@@ -41,6 +40,12 @@ public class SiteUser {
     @OneToMany(mappedBy = "siteUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
 
+    public SiteUser(String emailAddress, String phoneNumber, String password, String username) {
+        this.emailAddress = emailAddress;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.username = username;
+    }
 
     public SiteUser() {
     }

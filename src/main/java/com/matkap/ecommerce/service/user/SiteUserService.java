@@ -9,12 +9,12 @@ import java.util.List;
 public interface SiteUserService {
 
 
-    public SiteUser createSiteUser(SiteUserRequestDto siteUserRequestDto);
-    public List<SiteUser> getSiteUsers();
-    public SiteUser getSiteUserById(Long siteUserId);
+    public SiteUserRequestDto createSiteUser(SiteUserRequestDto siteUserRequestDto);
+    public List<SiteUserRequestDto> getSiteUsers();
+    public SiteUserRequestDto getSiteUserById(Long siteUserId);
     public SiteUser getSiteUser(Long siteUserId);
     public void deleteSiteUser(Long siteUserId);
-    public SiteUser editSiteUser(Long siteUserId, SiteUserRequestDto siteUserRequestDto);
+    public SiteUserRequestDto editSiteUser(Long siteUserId, SiteUserRequestDto siteUserRequestDto);
 
     public SiteUserAddresses getAllAddressesByUser(Long siteUserId);
 

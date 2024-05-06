@@ -1,5 +1,6 @@
 package com.matkap.ecommerce.service.user.impl;
 
+import com.matkap.ecommerce.dto.SiteUserMapper;
 import com.matkap.ecommerce.dto.requestDto.user.SiteUserRequestDto;
 import com.matkap.ecommerce.exception.EntityNotFoundException;
 import com.matkap.ecommerce.model.user.SiteUser;
@@ -15,30 +16,30 @@ public class SiteUserServiceImpl implements SiteUserService {
 
     private final SiteUserRepository siteUserRepository;
 
-    public SiteUserServiceImpl(SiteUserRepository siteUserRepository) {
+    private final SiteUserMapper siteUserMapper;
+
+    public SiteUserServiceImpl(SiteUserRepository siteUserRepository, SiteUserMapper siteUserMapper) {
         this.siteUserRepository = siteUserRepository;
+        this.siteUserMapper = siteUserMapper;
     }
 
 
     @Override
-    public SiteUser createSiteUser(SiteUserRequestDto siteUserRequestDto) {
-        SiteUser siteUser = new SiteUser();
-        siteUser.setUsername(siteUserRequestDto.getUsername());
-        siteUser.setPassword(siteUserRequestDto.getPassword());
-        siteUser.setEmailAddress(siteUserRequestDto.getEmailAddress());
-        siteUser.setPhoneNumber(siteUserRequestDto.getPhoneNumber());
+    public SiteUserRequestDto createSiteUser(SiteUserRequestDto siteUserRequestDto) {
 
-        return siteUserRepository.save(siteUser);
+        SiteUser siteUser = siteUserMapper.toEntity(siteUserRequestDto);
+        return siteUserMapper.toDto(siteUserRepository.save(siteUser));
+
     }
 
     @Override
-    public List<SiteUser> getSiteUsers() {
-        return siteUserRepository.findAll();
+    public List<SiteUserRequestDto> getSiteUsers() {
+        return siteUserMapper.toDtoList(siteUserRepository.findAll());
     }
 
     @Override
-    public SiteUser getSiteUserById(Long siteUserId) {
-        return getSiteUser(siteUserId);
+    public SiteUserRequestDto getSiteUserById(Long siteUserId) {
+        return siteUserMapper.toDto(getSiteUser(siteUserId));
     }
 
     @Override
@@ -54,14 +55,14 @@ public class SiteUserServiceImpl implements SiteUserService {
     }
 
     @Override
-    public SiteUser editSiteUser(Long siteUserId, SiteUserRequestDto siteUserRequestDto) {
+    public SiteUserRequestDto editSiteUser(Long siteUserId, SiteUserRequestDto siteUserRequestDto) {
         SiteUser siteUser = getSiteUser(siteUserId);
         siteUser.setUsername(siteUserRequestDto.getUsername());
         siteUser.setPassword(siteUserRequestDto.getPassword());
         siteUser.setEmailAddress(siteUserRequestDto.getEmailAddress());
         siteUser.setPhoneNumber(siteUserRequestDto.getPhoneNumber());
 
-        return siteUserRepository.save(siteUser);
+        return siteUserMapper.toDto(siteUserRepository.save(siteUser));
     }
 
     @Override

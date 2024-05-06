@@ -39,8 +39,8 @@ public class SiteUserController {
     })
     @Operation(summary = "Create Site user", description = "Creates a site user from the provided payload")
     @PostMapping("/create")
-    public ResponseEntity<SiteUser> createSiteUser(@Valid @RequestBody SiteUserRequestDto siteUserRequestDto){
-        SiteUser siteUser = siteUserService.createSiteUser(siteUserRequestDto);
+    public ResponseEntity<SiteUserRequestDto> createSiteUser(@Valid @RequestBody SiteUserRequestDto siteUserRequestDto){
+        SiteUserRequestDto siteUser = siteUserService.createSiteUser(siteUserRequestDto);
         return new ResponseEntity<>(siteUser, HttpStatus.OK);
     }
     @ApiResponses(value = {
@@ -49,8 +49,8 @@ public class SiteUserController {
     })
     @Operation(summary = "Get Site user by id", description = "Returns a site user based on an ID")
     @GetMapping("/get/{siteUserId}")
-    public ResponseEntity<SiteUser> getSiteUserById(@PathVariable Long siteUserId){
-        SiteUser siteUser = siteUserService.getSiteUserById(siteUserId);
+    public ResponseEntity<SiteUserRequestDto> getSiteUserById(@PathVariable Long siteUserId){
+        SiteUserRequestDto siteUser = siteUserService.getSiteUserById(siteUserId);
         return new ResponseEntity<>(siteUser, HttpStatus.OK);
     }
     @ApiResponse(responseCode = "200", description = "Successful retrieval of all addresses from site user", content = @Content(array = @ArraySchema(schema = @Schema(implementation = SiteUserAddresses.class))))
@@ -66,8 +66,8 @@ public class SiteUserController {
     @ApiResponse(responseCode = "200", description = "Successful retrieval of contacts", content = @Content(array = @ArraySchema(schema = @Schema(implementation = SiteUser.class))))
     @Operation(summary = "Retrieve all Site users", description = "Provides a list of all site users" )
     @GetMapping("/all")
-    public ResponseEntity<List<SiteUser>> getAllUsers(){
-        List<SiteUser> siteUsers = siteUserService.getSiteUsers();
+    public ResponseEntity<List<SiteUserRequestDto>> getAllUsers(){
+        List<SiteUserRequestDto> siteUsers = siteUserService.getSiteUsers();
         return new ResponseEntity<>(siteUsers, HttpStatus.OK);
     }
 
@@ -87,9 +87,9 @@ public class SiteUserController {
     })
     @Operation(summary = "Edit Site user", description = "Edits a site user from the provided payload and id")
     @PutMapping("/edit/{siteUserId}")
-    public ResponseEntity<SiteUser> editSiteUser(@PathVariable Long siteUserId,
+    public ResponseEntity<SiteUserRequestDto> editSiteUser(@PathVariable Long siteUserId,
                                                  @Valid @RequestBody SiteUserRequestDto siteUserRequestDto){
-        SiteUser siteUser = siteUserService.editSiteUser(siteUserId, siteUserRequestDto);
+        SiteUserRequestDto siteUser = siteUserService.editSiteUser(siteUserId, siteUserRequestDto);
         return new ResponseEntity<>(siteUser, HttpStatus.OK);
     }
 }

@@ -14,6 +14,16 @@ public class SiteUserRequestDto {
     private String username;
 
 
+    public SiteUserRequestDto(String emailAddress, String phoneNumber, String password, String username) {
+        this.emailAddress = emailAddress;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.username = username;
+    }
+
+    public SiteUserRequestDto() {
+    }
+
     public String getEmailAddress() {
         return emailAddress;
     }

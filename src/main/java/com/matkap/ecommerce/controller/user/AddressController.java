@@ -39,8 +39,8 @@ public class AddressController {
     })
     @Operation(summary = "Create Address", description = "Creates a address from the provided payload")
     @PostMapping("/create")
-    public ResponseEntity<Address> createAddress(@Valid @RequestBody AddressRequestDto addressRequestDto){
-        Address address = addressService.createAddress(addressRequestDto);
+    public ResponseEntity<AddressRequestDto> createAddress(@Valid @RequestBody AddressRequestDto addressRequestDto){
+        AddressRequestDto address = addressService.createAddress(addressRequestDto);
         return new ResponseEntity<>(address, HttpStatus.OK);
     }
     @ApiResponses(value = {
@@ -48,15 +48,15 @@ public class AddressController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval of address", content = @Content(schema = @Schema(implementation = Address.class))),
     })
     @GetMapping("/get/{addressId}")
-    public ResponseEntity<Address> getAddressById(@PathVariable Long addressId){
-        Address address = addressService.getAddressById(addressId);
+    public ResponseEntity<AddressRequestDto> getAddressById(@PathVariable Long addressId){
+        AddressRequestDto address = addressService.getAddressById(addressId);
         return new ResponseEntity<>(address, HttpStatus.OK);
     }
     @ApiResponse(responseCode = "200", description = "Successful retrieval of addresses", content = @Content(array = @ArraySchema(schema = @Schema(implementation = Address.class))))
     @Operation(summary = "Retrieve all Addresses", description = "Provides a list of all addresses" )
     @GetMapping("/all")
-    public ResponseEntity<List<Address>> getAllAddresses(){
-        List<Address> addresses = addressService.getAddresses();
+    public ResponseEntity<List<AddressRequestDto>> getAllAddresses(){
+        List<AddressRequestDto> addresses = addressService.getAddresses();
         return new ResponseEntity<>(addresses, HttpStatus.OK);
     }
 
@@ -84,9 +84,9 @@ public class AddressController {
     })
     @Operation(summary = "Edit Address", description = "Edits a address from the provided payload and id")
     @PutMapping("/edit/{addressId}")
-    public ResponseEntity<Address> editAddress(@PathVariable Long addressId,
+    public ResponseEntity<AddressRequestDto> editAddress(@PathVariable Long addressId,
                                                @Valid @RequestBody AddressRequestDto addressRequestDto){
-        Address address = addressService.editAddress(addressId, addressRequestDto);
+        AddressRequestDto address = addressService.editAddress(addressId, addressRequestDto);
         return new ResponseEntity<>(address, HttpStatus.OK);
     }
 

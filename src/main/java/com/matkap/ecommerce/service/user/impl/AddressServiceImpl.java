@@ -1,5 +1,6 @@
 package com.matkap.ecommerce.service.user.impl;
 
+import com.matkap.ecommerce.dto.AddressMapper;
 import com.matkap.ecommerce.dto.requestDto.user.AddressRequestDto;
 import com.matkap.ecommerce.exception.EntityNotFoundException;
 import com.matkap.ecommerce.model.user.Address;
@@ -22,28 +23,25 @@ public class AddressServiceImpl implements AddressService {
 
     private final SiteUserService siteUserService;
 
+    private final AddressMapper addressMapper;
 
-    public AddressServiceImpl(AddressRepository addressRepository, CountryRepository countryRepository, SiteUserService siteUserService) {
+
+    public AddressServiceImpl(AddressRepository addressRepository, CountryRepository countryRepository, SiteUserService siteUserService, AddressMapper addressMapper) {
         this.addressRepository = addressRepository;
         this.countryRepository = countryRepository;
         this.siteUserService = siteUserService;
+        this.addressMapper = addressMapper;
     }
 
 
     @Override
     @Transactional
-    public Address createAddress(AddressRequestDto addressRequestDto) {
-        Address address = new Address();
+    public AddressRequestDto createAddress(AddressRequestDto addressRequestDto) {
+        Address address = addressMapper.toEntity(addressRequestDto);
+        //
         address.setSiteUser(siteUserService.getSiteUser(addressRequestDto.getSiteUserId()));
         Country country = getCountry(addressRequestDto.getCountryId());
         address.setCountry(country);
-        address.setUnitNumber(addressRequestDto.getUnitNumber());
-        address.setStreetNumber(addressRequestDto.getStreetNumber());
-        address.setAddressLine1(addressRequestDto.getAddressLine1());
-        address.setAddressLine2(addressRequestDto.getAddressLine2());
-        address.setCity(addressRequestDto.getCity());
-        address.setRegion(addressRequestDto.getRegion());
-        address.setPostalCode(addressRequestDto.getPostalCode());
         //default address
         if(addressRequestDto.getDefaultAddress() == Boolean.TRUE){
             addressRepository.updateDefaultAddressBySiteUser(addressRequestDto.getSiteUserId());
@@ -51,12 +49,12 @@ public class AddressServiceImpl implements AddressService {
         }else{
             address.setDefaultAddress(Boolean.FALSE);
         }
-        return addressRepository.save(address);
+        return addressMapper.toDto(addressRepository.save(address));
     }
 
     @Override
-    public List<Address> getAddresses() {
-        return addressRepository.findAll();
+    public List<AddressRequestDto> getAddresses() {
+        return addressMapper.toDtoList(addressRepository.findAll());
     }
 
     @Override
@@ -65,8 +63,8 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Address getAddressById(Long addressId) {
-        return getAddress(addressId);
+    public AddressRequestDto getAddressById(Long addressId) {
+        return addressMapper.toDto(getAddress(addressId));
     }
 
     @Override
@@ -89,7 +87,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
 
-    public Address editAddress(Long addressId, AddressRequestDto addressRequestDto) {
+    public AddressRequestDto editAddress(Long addressId, AddressRequestDto addressRequestDto) {
         Address address = getAddress(addressId);
         address.setSiteUser(siteUserService.getSiteUser(addressRequestDto.getSiteUserId()));
         Country country = getCountry(addressRequestDto.getCountryId());
@@ -102,7 +100,7 @@ public class AddressServiceImpl implements AddressService {
         address.setRegion(addressRequestDto.getRegion());
         address.setPostalCode(addressRequestDto.getPostalCode());
         addressRepository.save(address);
-        return address;
+        return addressMapper.toDto(address);
     }
 
     @Override

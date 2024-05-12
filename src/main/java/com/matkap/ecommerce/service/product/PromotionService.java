@@ -2,20 +2,21 @@ package com.matkap.ecommerce.service.product;
 
 import com.matkap.ecommerce.dto.requestDto.product.PromotionRequestDto;
 import com.matkap.ecommerce.model.product.Promotion;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface PromotionService {
 
 
-    Promotion createPromotion(PromotionRequestDto promotionRequestDto);
-    Promotion getPromotionById(Long promotionId);
-    Page<Promotion> getAllPromotions(Pageable pageable);
+    PromotionRequestDto createPromotion(PromotionRequestDto promotionRequestDto);
+    PromotionRequestDto getPromotionById(Long promotionId);
+    List<PromotionRequestDto> getAllPromotions();
     Promotion getPromotionOrThrow(Long promotionId);
     void deletePromotion(Long promotionId);
-    Promotion updatePromotion(PromotionRequestDto promotionRequestDto, Long promotionId);
+    PromotionRequestDto updatePromotion(PromotionRequestDto promotionRequestDto, Long promotionId);
 
-    Promotion addProductCategoryToPromotion(Long promotionId, Long productCategoryId);
-    Promotion removeProductCategoryFromPromotion(Long promotionId, Long productCategoryId);
+    PromotionRequestDto addProductCategoryToPromotion(Long promotionId, Long productCategoryId);
+    PromotionRequestDto removeProductCategoryFromPromotion(Long promotionId, Long productCategoryId);
 
 }

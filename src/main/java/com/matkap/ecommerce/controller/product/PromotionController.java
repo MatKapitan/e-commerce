@@ -21,6 +21,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/promotions", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Promotion Controller", description = "Create, retrieve, delete and edit promotions" )
@@ -39,8 +41,8 @@ public class PromotionController {
     })
     @Operation(summary = "Create Shop order", description = "Creates a promotion from the provided payload")
     @PostMapping("/create")
-    public ResponseEntity<Promotion> createPromotion(@Valid @RequestBody PromotionRequestDto promotionRequestDto){
-        Promotion promotion = promotionService.createPromotion(promotionRequestDto);
+    public ResponseEntity<PromotionRequestDto> createPromotion(@Valid @RequestBody PromotionRequestDto promotionRequestDto){
+        PromotionRequestDto promotion = promotionService.createPromotion(promotionRequestDto);
         return new ResponseEntity<>(promotion, HttpStatus.OK);
     }
     @ApiResponses(value = {
@@ -49,16 +51,16 @@ public class PromotionController {
     })
     @Operation(summary = "Retrieve Promotion", description = "Returns a promotion based on id" )
     @GetMapping("/{promotionId}")
-    public ResponseEntity<Promotion> getPromotionById(@PathVariable Long promotionId){
-        Promotion promotion = promotionService.getPromotionById(promotionId);
+    public ResponseEntity<PromotionRequestDto> getPromotionById(@PathVariable Long promotionId){
+        PromotionRequestDto promotion = promotionService.getPromotionById(promotionId);
         return new ResponseEntity<>(promotion, HttpStatus.OK);
 
     }
     @Operation(summary = "Retrieve promotions", description = "Provides a list of all promotions" )
     @ApiResponse(responseCode = "200", description = "Successful retrieval of all promotions", content = @Content(array = @ArraySchema(schema = @Schema(implementation = Promotion.class))))
     @GetMapping("/all")
-    public ResponseEntity<Page<Promotion>> getAllPromotions(@PageableDefault(value = 5, page = 0)  Pageable pageable){
-        Page<Promotion> promotions = promotionService.getAllPromotions(pageable);
+    public ResponseEntity<List<PromotionRequestDto>> getAllPromotions(){
+        List<PromotionRequestDto> promotions = promotionService.getAllPromotions();
         return new ResponseEntity<>(promotions, HttpStatus.OK);
     }
     @ApiResponses(value = {
@@ -73,27 +75,27 @@ public class PromotionController {
     }
     @ApiResponses(value = {
             @ApiResponse(responseCode = "404", description = "Promotion doesn't exist", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
-            @ApiResponse(responseCode = "200", description = "Successful edit of promotion", content = @Content(schema = @Schema(implementation = Promotion.class))),
+            @ApiResponse(responseCode = "200", description = "Successful edit of promotion", content = @Content(schema = @Schema(implementation = PromotionRequestDto.class))),
     })
     @Operation(summary = "Edit Promotion", description = "Edits a promotion from the provided payload and id")
     @PutMapping("/edit/{promotionId}")
-    public ResponseEntity<Promotion> updatePromotion(@PathVariable Long promotionId,
+    public ResponseEntity<PromotionRequestDto> updatePromotion(@PathVariable Long promotionId,
                                                      @Valid @RequestBody PromotionRequestDto promotionRequestDto){
-        Promotion promotion = promotionService.updatePromotion(promotionRequestDto, promotionId);
+        PromotionRequestDto promotion = promotionService.updatePromotion(promotionRequestDto, promotionId);
         return new ResponseEntity<>(promotion, HttpStatus.OK);
     }
 
     @PutMapping("/{promotionId}/add/product-category/{productCategoryId}")
-    public ResponseEntity<Promotion> addProductCategory(@PathVariable Long promotionId,
+    public ResponseEntity<PromotionRequestDto> addProductCategory(@PathVariable Long promotionId,
                                                         @PathVariable Long productCategoryId){
-        Promotion promotion = promotionService.addProductCategoryToPromotion(promotionId, productCategoryId);
+        PromotionRequestDto promotion = promotionService.addProductCategoryToPromotion(promotionId, productCategoryId);
         return new ResponseEntity<>(promotion, HttpStatus.OK);
     }
 
     @PutMapping("/{promotionId}/remove/product-category/{productCategoryId}")
-    public ResponseEntity<Promotion> removeProductCategory(@PathVariable Long promotionId,
+    public ResponseEntity<PromotionRequestDto> removeProductCategory(@PathVariable Long promotionId,
                                                             @PathVariable Long productCategoryId){
-        Promotion promotion = promotionService.removeProductCategoryFromPromotion(promotionId, productCategoryId);
+        PromotionRequestDto promotion = promotionService.removeProductCategoryFromPromotion(promotionId, productCategoryId);
         return new ResponseEntity<>(promotion, HttpStatus.OK);
     }
 

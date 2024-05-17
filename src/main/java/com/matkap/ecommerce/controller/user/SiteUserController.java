@@ -2,6 +2,7 @@ package com.matkap.ecommerce.controller.user;
 
 
 import com.matkap.ecommerce.dto.requestDto.user.SiteUserRequestDto;
+import com.matkap.ecommerce.dto.responseDto.user.SiteUserResponseDto;
 import com.matkap.ecommerce.exception.ErrorResponse;
 import com.matkap.ecommerce.model.user.SiteUser;
 import com.matkap.ecommerce.repository.user.projections.SiteUserAddresses;
@@ -45,12 +46,12 @@ public class SiteUserController {
     }
     @ApiResponses(value = {
             @ApiResponse(responseCode = "404", description = "Site user doesn't exist", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
-            @ApiResponse(responseCode = "200", description = "Successful retrieval of contact", content = @Content(schema = @Schema(implementation = SiteUser.class))),
+            @ApiResponse(responseCode = "200", description = "Successful retrieval of contact", content = @Content(schema = @Schema(implementation = SiteUserResponseDto.class))),
     })
     @Operation(summary = "Get Site user by id", description = "Returns a site user based on an ID")
     @GetMapping("/get/{siteUserId}")
-    public ResponseEntity<SiteUserRequestDto> getSiteUserById(@PathVariable Long siteUserId){
-        SiteUserRequestDto siteUser = siteUserService.getSiteUserById(siteUserId);
+    public ResponseEntity<SiteUserResponseDto> getSiteUserById(@PathVariable Long siteUserId){
+        SiteUserResponseDto siteUser = siteUserService.getSiteUserById(siteUserId);
         return new ResponseEntity<>(siteUser, HttpStatus.OK);
     }
     @ApiResponse(responseCode = "200", description = "Successful retrieval of all addresses from site user", content = @Content(array = @ArraySchema(schema = @Schema(implementation = SiteUserAddresses.class))))
@@ -63,11 +64,11 @@ public class SiteUserController {
     //TODO check up this handler method
 
 
-    @ApiResponse(responseCode = "200", description = "Successful retrieval of contacts", content = @Content(array = @ArraySchema(schema = @Schema(implementation = SiteUser.class))))
+    @ApiResponse(responseCode = "200", description = "Successful retrieval of contacts", content = @Content(array = @ArraySchema(schema = @Schema(implementation = SiteUserResponseDto.class))))
     @Operation(summary = "Retrieve all Site users", description = "Provides a list of all site users" )
     @GetMapping("/all")
-    public ResponseEntity<List<SiteUserRequestDto>> getAllUsers(){
-        List<SiteUserRequestDto> siteUsers = siteUserService.getSiteUsers();
+    public ResponseEntity<List<SiteUserResponseDto>> getAllUsers(){
+        List<SiteUserResponseDto> siteUsers = siteUserService.getSiteUsers();
         return new ResponseEntity<>(siteUsers, HttpStatus.OK);
     }
 

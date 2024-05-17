@@ -2,6 +2,7 @@ package com.matkap.ecommerce.service.user.impl;
 
 import com.matkap.ecommerce.dto.SiteUserMapper;
 import com.matkap.ecommerce.dto.requestDto.user.SiteUserRequestDto;
+import com.matkap.ecommerce.dto.responseDto.user.SiteUserResponseDto;
 import com.matkap.ecommerce.exception.EntityNotFoundException;
 import com.matkap.ecommerce.model.user.SiteUser;
 import com.matkap.ecommerce.repository.user.SiteUserRepository;
@@ -33,15 +34,16 @@ public class SiteUserServiceImpl implements SiteUserService {
     }
 
     @Override
-    public List<SiteUserRequestDto> getSiteUsers() {
-        return siteUserMapper.toDtoList(siteUserRepository.findAll());
+    public List<SiteUserResponseDto> getSiteUsers() {
+        return siteUserRepository.findAllSiteUsers();
     }
 
     @Override
-    public SiteUserRequestDto getSiteUserById(Long siteUserId) {
-        return siteUserMapper.toDto(getSiteUser(siteUserId));
+    public SiteUserResponseDto getSiteUserById(Long siteUserId) {
+        return siteUserRepository.findSideUsersById(siteUserId)
+                .orElseThrow(()-> new EntityNotFoundException(siteUserId , SiteUser.class));
     }
-
+// TODO delete one
     @Override
     public SiteUser getSiteUser(Long siteUserId) {
         return siteUserRepository.findById(siteUserId)
